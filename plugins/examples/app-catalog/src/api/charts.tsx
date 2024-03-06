@@ -25,6 +25,8 @@ export function fetchChartsFromArtifact(
 
 // PABHAT: Handle this later
 export function fetchChartDetailFromArtifact(chartName: string, repoName: string) {
+  // This appears to be loading the README. For example, the response of https://artifacthub.io/api/v1/packages/helm/grafana/grafana
+  // TODO: Fix this
   return fetch(`http://localhost:4466/externalproxy`, {
     headers: {
       'Forward-To': `https://artifacthub.io/api/v1/packages/helm/${repoName}/${chartName}`,
@@ -32,10 +34,15 @@ export function fetchChartDetailFromArtifact(chartName: string, repoName: string
   }).then(response => response.json());
 }
 
-export function fetchChartValues(packageID: string, packageVersion: string) {
-  return fetch(`http://localhost:4466/externalproxy`, {
+export function fetchChartValues() {
+  /*return fetch(`http://localhost:4466/externalproxy`, {
     headers: {
       'Forward-To': `https://artifacthub.io/api/v1/packages/${packageID}/${packageVersion}/values`,
     },
-  }).then(response => response.text());
+  }).then(response => response.text());*/
+  // TODO: Fix this
+  return fetch(
+      `http://localhost:80/charts/grafana-6.11.0/values.yaml`
+  ).then(response => response.text());
+
 }

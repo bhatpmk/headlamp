@@ -46,12 +46,13 @@ export function EditorDialog(props: {
   }, [openEditor]);
 
   function handleChartValueFetch(chart: any) {
-    const packageID = chart.package_id;
-    const packageVersion = chart.version;
-    setChartValuesLoading(true);
-    fetchChartValues(packageID, packageVersion)
+    //const packageID = chart.package_id;
+    //const packageVersion = chart.version;
+    // setChartValuesLoading(true);
+    // fetchChartValues(packageID, packageVersion)
+    fetchChartValues()
       .then((response: any) => {
-        setChartValuesLoading(false);
+        // setChartValuesLoading(false);
         setChartValues(response);
         setDefaultChartValues(yamlToJSON(response));
       })
@@ -65,13 +66,15 @@ export function EditorDialog(props: {
   }
 
   useEffect(() => {
-    fetchChartDetailFromArtifact(chart.name, chart.repository.name).then(response => {
+    // TODO: Fix this
+    fetchChartDetailFromArtifact(chart.name, chart.name).then(response => {
       if (response.available_versions) {
         setVersions(
           response.available_versions.map(({ version }) => ({ title: version, value: version }))
         );
       }
     });
+
     handleChartValueFetch(chart);
   }, [chart]);
 
@@ -126,21 +129,27 @@ export function EditorDialog(props: {
       });
       return;
     }
-    const repoName = chart.repository.name;
-    const repoURL = chart.repository.url;
+    // const repoName = chart.repository.name;
+    const repoName = chart.name;
+    // const repoURL = chart.repository.url;
+    const repoURL = `https://grafana.github.io/helm-charts`;
     const jsonChartValues = yamlToJSON(chartValues);
     const chartValuesDIFF = _.omitBy(jsonChartValues, (value, key) =>
       _.isEqual(defaultChartValues[key], value)
     );
     setInstallLoading(true);
 
+    // TODO: Rather than adding a helm repo, use the URL to access the .tgz file
     addRepository(repoName, repoURL)
       .then(() => {
         createRelease(
           releaseName,
           selectedNamespace.value,
           btoa(unescape(encodeURIComponent(jsonToYAML(chartValuesDIFF)))),
-          `${repoName}/${chart.name}`,
+          //`${repoName}/${chart.name}`,
+          // Use absolute URL of the chart, as supported here- https://helm.sh/docs/helm/helm_install/
+          // TODO: Fix this
+          `http://localhost:80/charts/grafana-6.11.0.tgz`,
           selectedVersion.value,
           chartInstallDescription
         )
