@@ -12,6 +12,11 @@ import _ from 'lodash';
 import { decodeToken } from 'react-jwt';
 import helpers, { getHeadlampAPIHeaders, isDebugVerbose } from '../../helpers';
 import store from '../../redux/stores/store';
+import {
+  findKubeconfigByClusterName,
+  getUserIdFromLocalStorage,
+  storeStatelessClusterKubeconfig,
+} from '../../stateless/';
 import { getToken, logout, setToken } from '../auth';
 import { getCluster } from '../util';
 import { KubeMetadata, KubeMetrics, KubeObjectInterface } from './cluster';
@@ -334,12 +339,19 @@ export async function clusterRequest(
     isJSON = true,
     ...otherParams
   } = params;
+
+  const userID = getUserIdFromLocalStorage();
   const opts: { headers: RequestHeaders } = Object.assign({ headers: {} }, otherParams);
   const cluster = paramsCluster || '';
 
   let fullPath = path;
   if (cluster) {
     const token = getToken(cluster);
+    const kubeconfig = await findKubeconfigByClusterName(cluster);
+    if (kubeconfig !== null) {
+      opts.headers['KUBECONFIG'] = kubeconfig;
+      opts.headers['X-HEADLAMP-USER-ID'] = userID;
+    }
 
     // Refresh service account token only if the cluster auth type is not OIDC
     if (getClusterAuthType(cluster) !== 'oidc') {
@@ -377,6 +389,13 @@ export async function clusterRequest(
   const headerVal = response.headers.get('X-Reload');
   if (headerVal && headerVal.indexOf('reload') !== -1) {
     window.location.reload();
+  }
+
+  // In case of OIDC auth if the token is about to expire the backend
+  // sends a refreshed token in the response header.
+  const newToken = response.headers.get('X-Authorization');
+  if (newToken) {
+    setToken(cluster, newToken);
   }
 
   if (!response.ok) {
@@ -460,7 +479,14 @@ async function repeatStreamFunc(
     ...args: any[]
   ) {
     const endpoint = apiEndpoints[endpointIndex];
-    return endpoint[funcName as keyof ApiFactoryReturn](...args, errCb);
+    const fullArgs = [...args];
+    let errCbIndex = 2;
+    if (endpoint.isNamespaced) {
+      ++errCbIndex;
+    }
+    fullArgs.splice(errCbIndex, 0, errCb);
+
+    return endpoint[funcName as keyof ApiFactoryReturn](...fullArgs);
   }
 
   let endpointIndex = 0;
@@ -561,10 +587,21 @@ function multipleApiFactory(
   );
 
   return {
-    list: (cb: StreamResultsCb, errCb: StreamErrCb) =>
-      repeatStreamFunc(apiEndpoints, 'list', errCb, cb),
-    get: (name: string, cb: StreamResultsCb, errCb: StreamErrCb) =>
-      repeatStreamFunc(apiEndpoints, 'get', errCb, name, cb),
+    list: (
+      cb: StreamResultsCb,
+      errCb: StreamErrCb,
+      queryParams?: QueryParameters,
+      cluster?: string
+    ) => {
+      return repeatStreamFunc(apiEndpoints, 'list', errCb, cb, queryParams, cluster);
+    },
+    get: (
+      name: string,
+      cb: StreamResultsCb,
+      errCb: StreamErrCb,
+      queryParams?: QueryParameters,
+      cluster?: string
+    ) => repeatStreamFunc(apiEndpoints, 'get', errCb, name, cb, queryParams, cluster),
     post: repeatFactoryMethod(apiEndpoints, 'post'),
     patch: repeatFactoryMethod(apiEndpoints, 'patch'),
     put: repeatFactoryMethod(apiEndpoints, 'put'),
@@ -607,23 +644,35 @@ function singleApiFactory(group: string, version: string, resource: string) {
   const apiRoot = getApiRoot(group, version);
   const url = `${apiRoot}/${resource}`;
   return {
-    list: (cb: StreamResultsCb, errCb: StreamErrCb, queryParams?: QueryParameters) => {
+    list: (
+      cb: StreamResultsCb,
+      errCb: StreamErrCb,
+      queryParams?: QueryParameters,
+      cluster?: string
+    ) => {
       if (isDebugVerbose('k8s/apiProxy@singleApiFactory list')) {
-        console.debug('k8s/apiProxy@singleApiFactory list', { queryParams });
+        console.debug('k8s/apiProxy@singleApiFactory list', { cluster, queryParams });
       }
 
-      return streamResults(url, cb, errCb, queryParams);
+      return streamResultsForCluster(url, { cb, errCb, cluster }, queryParams);
     },
-    get: (name: string, cb: StreamResultsCb, errCb: StreamErrCb, queryParams?: QueryParameters) =>
-      streamResult(url, name, cb, errCb, queryParams),
-    post: (body: KubeObjectInterface, queryParams?: QueryParameters) =>
-      post(url + asQuery(queryParams), body),
-    put: (body: KubeObjectInterface, queryParams?: QueryParameters) =>
-      put(`${url}/${body.metadata.name}` + asQuery(queryParams), body),
-    patch: (body: OpPatch[], name: string, queryParams?: QueryParameters) =>
-      patch(`${url}/${name}` + asQuery({ ...queryParams, ...{ pretty: 'true' } }), body),
-    delete: (name: string, queryParams?: QueryParameters) =>
-      remove(`${url}/${name}` + asQuery(queryParams)),
+    get: (
+      name: string,
+      cb: StreamResultsCb,
+      errCb: StreamErrCb,
+      queryParams?: QueryParameters,
+      cluster?: string
+    ) => streamResult(url, name, cb, errCb, queryParams, cluster),
+    post: (body: KubeObjectInterface, queryParams?: QueryParameters, cluster?: string) =>
+      post(url + asQuery(queryParams), body, true, { cluster }),
+    put: (body: KubeObjectInterface, queryParams?: QueryParameters, cluster?: string) =>
+      put(`${url}/${body.metadata.name}` + asQuery(queryParams), body, true, { cluster }),
+    patch: (body: OpPatch[], name: string, queryParams?: QueryParameters, cluster?: string) =>
+      patch(`${url}/${name}` + asQuery({ ...queryParams, ...{ pretty: 'true' } }), body, true, {
+        cluster,
+      }),
+    delete: (name: string, queryParams?: QueryParameters, cluster?: string) =>
+      remove(`${url}/${name}` + asQuery(queryParams), { cluster }),
     isNamespaced: false,
     apiInfo: [{ group, version, resource }],
   };
@@ -656,10 +705,23 @@ function multipleApiFactoryWithNamespace(
   );
 
   return {
-    list: (namespace: string, cb: StreamResultsCb, errCb: StreamErrCb) =>
-      repeatStreamFunc(apiEndpoints, 'list', errCb, namespace, cb),
-    get: (namespace: string, name: string, cb: StreamResultsCb, errCb: StreamErrCb) =>
-      repeatStreamFunc(apiEndpoints, 'get', errCb, namespace, name, cb),
+    list: (
+      namespace: string,
+      cb: StreamResultsCb,
+      errCb: StreamErrCb,
+      queryParams?: QueryParameters,
+      cluster?: string
+    ) => {
+      return repeatStreamFunc(apiEndpoints, 'list', errCb, namespace, cb, queryParams, cluster);
+    },
+    get: (
+      namespace: string,
+      name: string,
+      cb: StreamResultsCb,
+      errCb: StreamErrCb,
+      queryParams?: QueryParameters,
+      cluster?: string
+    ) => repeatStreamFunc(apiEndpoints, 'get', errCb, namespace, name, cb, queryParams, cluster),
     post: repeatFactoryMethod(apiEndpoints, 'post'),
     patch: repeatFactoryMethod(apiEndpoints, 'patch'),
     put: repeatFactoryMethod(apiEndpoints, 'put'),
@@ -698,29 +760,47 @@ function simpleApiFactoryWithNamespace(
       namespace: string,
       cb: StreamResultsCb,
       errCb: StreamErrCb,
-      queryParams?: QueryParameters
+      queryParams?: QueryParameters,
+      cluster?: string
     ) => {
       if (isDebugVerbose('k8s/apiProxy@simpleApiFactoryWithNamespace list')) {
-        console.debug('k8s/apiProxy@simpleApiFactoryWithNamespace list', { queryParams });
+        console.debug('k8s/apiProxy@simpleApiFactoryWithNamespace list', { cluster, queryParams });
       }
 
-      return streamResults(url(namespace), cb, errCb, queryParams);
+      return streamResultsForCluster(url(namespace), { cb, errCb, cluster }, queryParams);
     },
     get: (
       namespace: string,
       name: string,
       cb: StreamResultsCb,
       errCb: StreamErrCb,
-      queryParams?: QueryParameters
-    ) => streamResult(url(namespace), name, cb, errCb, queryParams),
-    post: (body: KubeObjectInterface, queryParams?: QueryParameters) =>
-      post(url(body.metadata.namespace!) + asQuery(queryParams), body),
-    patch: (body: OpPatch[], namespace: string, name: string, queryParams?: QueryParameters) =>
-      patch(`${url(namespace)}/${name}` + asQuery({ ...queryParams, ...{ pretty: 'true' } }), body),
-    put: (body: KubeObjectInterface, queryParams?: QueryParameters) =>
-      put(`${url(body.metadata.namespace!)}/${body.metadata.name}` + asQuery(queryParams), body),
-    delete: (namespace: string, name: string, queryParams?: QueryParameters) =>
-      remove(`${url(namespace)}/${name}` + asQuery(queryParams)),
+      queryParams?: QueryParameters,
+      cluster?: string
+    ) => streamResult(url(namespace), name, cb, errCb, queryParams, cluster),
+    post: (body: KubeObjectInterface, queryParams?: QueryParameters, cluster?: string) =>
+      post(url(body.metadata.namespace!) + asQuery(queryParams), body, true, { cluster }),
+    patch: (
+      body: OpPatch[],
+      namespace: string,
+      name: string,
+      queryParams?: QueryParameters,
+      cluster?: string
+    ) =>
+      patch(
+        `${url(namespace)}/${name}` + asQuery({ ...queryParams, ...{ pretty: 'true' } }),
+        body,
+        true,
+        { cluster }
+      ),
+    put: (body: KubeObjectInterface, queryParams?: QueryParameters, cluster?: string) =>
+      put(
+        `${url(body.metadata.namespace!)}/${body.metadata.name}` + asQuery(queryParams),
+        body,
+        true,
+        { cluster }
+      ),
+    delete: (namespace: string, name: string, queryParams?: QueryParameters, cluster?: string) =>
+      remove(`${url(namespace)}/${name}` + asQuery(queryParams), { cluster }),
     isNamespaced: true,
     apiInfo: [{ group, version, resource }],
   };
@@ -764,7 +844,8 @@ function asQuery(queryParams?: QueryParameters): string {
 }
 
 async function resourceDefToApiFactory(
-  resourceDef: KubeObjectInterface
+  resourceDef: KubeObjectInterface,
+  clusterName?: string
 ): Promise<ApiFactoryReturn> {
   interface APIResourceList {
     resources: {
@@ -801,15 +882,19 @@ async function resourceDefToApiFactory(
     throw new Error(`apiVersion has no version string: ${resourceDef.apiVersion}`);
   }
 
+  const cluster = clusterName || getCluster() || '';
+
   // Get details about this resource. We could avoid this for known resources, but
   // this way we always get the right plural name and we also avoid eventually getting
   // the wrong "known" resource because e.g. there can be CustomResources with the same
   // kind as a known resource.
   const apiPrefix = !!apiGroup ? 'apis' : 'api';
-  const apiResult: APIResourceList = await request(
+  const apiResult: APIResourceList = await clusterRequest(
     `/${apiPrefix}/${resourceDef.apiVersion}`,
-    {},
-    false
+    {
+      cluster,
+      autoLogoutOnAuthError: false,
+    }
   );
   if (!apiResult) {
     throw new Error(`Unkown apiVersion: ${resourceDef.apiVersion}`);
@@ -838,9 +923,14 @@ function getApiRoot(group: string, version: string) {
 
 function apiScaleFactory(apiRoot: string, resource: string) {
   return {
-    get: (namespace: string, name: string) => request(url(namespace, name)),
-    put: (body: { metadata: KubeMetadata; spec: { replicas: number } }) =>
-      put(url(body.metadata.namespace!, body.metadata.name), body),
+    get: (namespace: string, name: string, clusterName?: string) => {
+      const cluster = clusterName || getCluster() || '';
+      return clusterRequest(url(namespace, name), { cluster });
+    },
+    put: (body: { metadata: KubeMetadata; spec: { replicas: number } }, clusterName?: string) => {
+      const cluster = clusterName || getCluster() || '';
+      return put(url(body.metadata.namespace!, body.metadata.name), body, undefined, { cluster });
+    },
   };
 
   function url(namespace: string, name: string) {
@@ -851,39 +941,66 @@ function apiScaleFactory(apiRoot: string, resource: string) {
 export function post(
   url: string,
   json: JSON | object | KubeObjectInterface,
-  autoLogoutOnAuthError = true,
-  requestOptions = {}
+  autoLogoutOnAuthError: boolean = true,
+  options: ClusterRequestParams = {}
 ) {
+  const { cluster: clusterName, ...requestOptions } = options;
   const body = JSON.stringify(json);
-  const opts = { method: 'POST', body, headers: JSON_HEADERS, ...requestOptions };
-  return request(url, opts, autoLogoutOnAuthError);
+  const cluster = clusterName || getCluster() || '';
+  return clusterRequest(url, {
+    method: 'POST',
+    body,
+    headers: JSON_HEADERS,
+    cluster,
+    autoLogoutOnAuthError,
+    ...requestOptions,
+  });
 }
 
-export function patch(url: string, json: any, autoLogoutOnAuthError = true, requestOptions = {}) {
+export function patch(
+  url: string,
+  json: any,
+  autoLogoutOnAuthError = true,
+  options: ClusterRequestParams = {}
+) {
+  const { cluster: clusterName, ...requestOptions } = options;
   const body = JSON.stringify(json);
+  const cluster = clusterName || getCluster() || '';
   const opts = {
     method: 'PATCH',
     body,
     headers: { ...JSON_HEADERS, 'Content-Type': 'application/json-patch+json' },
+    autoLogoutOnAuthError,
+    cluster,
     ...requestOptions,
   };
-  return request(url, opts, autoLogoutOnAuthError);
+  return clusterRequest(url, opts);
 }
 
 export function put(
   url: string,
   json: Partial<KubeObjectInterface>,
   autoLogoutOnAuthError = true,
-  requestOptions = {}
+  requestOptions: ClusterRequestParams = {}
 ) {
   const body = JSON.stringify(json);
-  const opts = { method: 'PUT', body, headers: JSON_HEADERS, ...requestOptions };
-  return request(url, opts, autoLogoutOnAuthError);
+  const { cluster: clusterName, ...restOptions } = requestOptions;
+  const opts = {
+    method: 'PUT',
+    body,
+    headers: JSON_HEADERS,
+    autoLogoutOnAuthError,
+    cluster: clusterName || getCluster() || '',
+    ...restOptions,
+  };
+  return clusterRequest(url, opts);
 }
 
-export function remove(url: string, requestOptions = {}) {
-  const opts = { method: 'DELETE', headers: JSON_HEADERS, ...requestOptions };
-  return request(url, opts);
+export function remove(url: string, requestOptions: ClusterRequestParams = {}) {
+  const { cluster: clusterName, ...restOptions } = requestOptions;
+  const cluster = clusterName || getCluster() || '';
+  const opts = { method: 'DELETE', headers: JSON_HEADERS, cluster, ...restOptions };
+  return clusterRequest(url, opts);
 }
 
 /**
@@ -902,10 +1019,12 @@ export async function streamResult(
   name: string,
   cb: StreamResultsCb,
   errCb: StreamErrCb,
-  queryParams?: QueryParameters
+  queryParams?: QueryParameters,
+  cluster?: string
 ) {
   let isCancelled = false;
   let socket: ReturnType<typeof stream>;
+  const clusterName = cluster || getCluster() || '';
 
   if (isDebugVerbose('k8s/apiProxy@streamResult')) {
     console.debug('k8s/apiProxy@streamResult', { url, name, queryParams });
@@ -917,7 +1036,9 @@ export async function streamResult(
 
   async function run() {
     try {
-      const item = await request(`${url}/${name}` + asQuery(queryParams));
+      const item = await clusterRequest(`${url}/${name}` + asQuery(queryParams), {
+        cluster: clusterName,
+      });
 
       if (isCancelled) return;
 
@@ -931,7 +1052,7 @@ export async function streamResult(
         url +
         asQuery({ ...queryParams, ...{ watch: '1', fieldSelector: `metadata.name=${name}` } });
 
-      socket = stream(watchUrl, x => cb(x.object), { isJson: true });
+      socket = stream(watchUrl, x => cb(x.object), { isJson: true, cluster: clusterName });
     } catch (err) {
       console.error('Error in api request', { err, url });
       // @todo: sometimes errCb is {}, the typing for apiProxy needs improving.
@@ -964,6 +1085,24 @@ export async function streamResults(
   errCb: StreamErrCb,
   queryParams: QueryParameters | undefined
 ) {
+  const cluster = getCluster() || '';
+  return streamResultsForCluster(url, { cb, errCb, cluster }, queryParams);
+}
+
+export interface StreamResultsParams {
+  cb: StreamResultsCb;
+  errCb: StreamErrCb;
+  cluster?: string;
+}
+
+export async function streamResultsForCluster(
+  url: string,
+  params: StreamResultsParams,
+  queryParams: QueryParameters | undefined
+) {
+  const { cb, errCb, cluster = '' } = params;
+  const clusterName = cluster || getCluster() || '';
+
   const results: {
     [uid: string]: KubeObjectInterface;
   } = {};
@@ -986,7 +1125,9 @@ export async function streamResults(
 
   async function run() {
     try {
-      const { kind, items, metadata } = await request(url + asQuery(queryParams));
+      const { kind, items, metadata } = await clusterRequest(url + asQuery(queryParams), {
+        cluster: clusterName,
+      });
 
       if (isCancelled) return;
 
@@ -995,7 +1136,7 @@ export async function streamResults(
       const watchUrl =
         url +
         asQuery({ ...queryParams, ...{ watch: '1', resourceVersion: metadata.resourceVersion } });
-      socket = stream(watchUrl, update, { isJson: true });
+      socket = stream(watchUrl, update, { isJson: true, cluster: clusterName });
     } catch (err) {
       console.error('Error in api request', { err, url });
       if (errCb && typeof errCb === 'function') {
@@ -1106,6 +1247,7 @@ export interface StreamArgs {
   stdin?: boolean;
   stdout?: boolean;
   stderr?: boolean;
+  cluster?: string;
 }
 
 /**
@@ -1120,9 +1262,9 @@ export interface StreamArgs {
  * the stream, and `getSocket`, which returns the WebSocket object.
  */
 export function stream(url: string, cb: StreamResultsCb, args: StreamArgs) {
-  let connection: ReturnType<typeof connectStream>;
+  let connection: { close: () => void; socket: WebSocket | null } | null = null;
   let isCancelled = false;
-  const { failCb } = args;
+  const { failCb, cluster = '' } = args;
   // We only set reconnectOnFailure as true by default if the failCb has not been provided.
   const { isJson = false, additionalProtocols, connectCb, reconnectOnFailure = !failCb } = args;
 
@@ -1135,7 +1277,7 @@ export function stream(url: string, cb: StreamResultsCb, args: StreamArgs) {
   return { cancel, getSocket };
 
   function getSocket() {
-    return connection.socket;
+    return connection ? connection.socket : null;
   }
 
   function cancel() {
@@ -1143,9 +1285,14 @@ export function stream(url: string, cb: StreamResultsCb, args: StreamArgs) {
     isCancelled = true;
   }
 
-  function connect() {
+  async function connect() {
     if (connectCb) connectCb();
-    connection = connectStream(url, cb, onFail, isJson, additionalProtocols);
+    try {
+      connection = await connectStream(url, cb, onFail, isJson, additionalProtocols, cluster);
+    } catch (error) {
+      console.error('Error connecting stream:', error);
+      onFail();
+    }
   }
 
   function retryOnFail() {
@@ -1183,18 +1330,52 @@ export function stream(url: string, cb: StreamResultsCb, args: StreamArgs) {
  *
  * @returns An object with a `close` function and a `socket` property.
  */
-function connectStream(
+async function connectStream(
   path: string,
   cb: StreamResultsCb,
   onFail: () => void,
   isJson: boolean,
-  additionalProtocols: string[] = []
+  additionalProtocols: string[] = [],
+  cluster = ''
 ) {
+  return connectStreamWithParams(path, cb, onFail, {
+    isJson,
+    cluster: cluster || getCluster() || '',
+    additionalProtocols,
+  });
+}
+
+interface StreamParams {
+  cluster?: string;
+  isJson?: boolean;
+  additionalProtocols?: string[];
+}
+
+/**
+ * @param path - The path of the WebSocket stream to connect to.
+ * @param cb - The function to call with each message received from the stream.
+ * @param onFail - The function to call if the stream is closed unexpectedly.
+ * @param params - Stream parameters to configure the connection.
+ * connectStreamWithParams is a wrapper around connectStream that allows for more
+ * flexibility in the parameters that can be passed to the WebSocket connection.
+ * This is an async function because it may need to fetch the kubeconfig for the
+ * cluster if the cluster is specified in the params. If kubeconfig is found, it
+ * sends the X-HEADLAMP-USER-ID header with the user ID from the localStorage.
+ * It is sent as a base64url encoded string in protocal format:
+ * `base64url.headlamp.authorization.k8s.io.${userID}`.
+ * @returns A promise that resolves to an object with a `close` function and a `socket` property.
+ */
+async function connectStreamWithParams(
+  path: string,
+  cb: StreamResultsCb,
+  onFail: () => void,
+  params?: StreamParams
+) {
+  const { isJson = false, additionalProtocols = [], cluster = '' } = params || {};
   let isClosing = false;
 
-  // @todo: This is a temporary way of getting the current cluster. We should improve it later.
-  const cluster = getCluster();
   const token = getToken(cluster || '');
+  const userID = getUserIdFromLocalStorage();
 
   const protocols = ['base64.binary.k8s.io', ...additionalProtocols];
   if (token) {
@@ -1203,11 +1384,24 @@ function connectStream(
   }
 
   let fullPath = path;
+  let url = '';
   if (cluster) {
     fullPath = combinePath(`/${CLUSTERS_PREFIX}/${cluster}`, path);
+    try {
+      const kubeconfig = await findKubeconfigByClusterName(cluster);
+
+      if (kubeconfig !== null) {
+        protocols.push(`base64url.headlamp.authorization.k8s.io.${userID}`);
+      }
+
+      url = combinePath(BASE_WS_URL, fullPath);
+    } catch (error) {
+      console.error('Error while finding kubeconfig:', error);
+      // If we can't find the kubeconfig, we'll just use the base URL.
+      url = combinePath(BASE_WS_URL, fullPath);
+    }
   }
 
-  const url = combinePath(BASE_WS_URL, fullPath);
   let socket: WebSocket | null = null;
   try {
     socket = new WebSocket(url, protocols);
@@ -1226,6 +1420,7 @@ function connectStream(
     if (!socket) {
       return;
     }
+
     socket.close();
   }
 
@@ -1247,9 +1442,11 @@ function connectStream(
       return;
     }
 
-    socket.removeEventListener('message', onMessage);
-    socket.removeEventListener('close', onClose);
-    socket.removeEventListener('error', onError);
+    if (socket) {
+      socket.removeEventListener('message', onMessage);
+      socket.removeEventListener('close', onClose);
+      socket.removeEventListener('error', onError);
+    }
 
     console.warn('Socket closed unexpectedly', { path, args });
     onFail();
@@ -1284,19 +1481,22 @@ function combinePath(base: string, path: string) {
  * Tries to POST, and if there's a conflict it does a PUT to the api endpoint.
  *
  * @param body - The kubernetes object body to apply.
+ * @param clusterName - The cluster to apply the body to. By default uses the current cluster (URL defined).
  *
  * @returns The response from the kubernetes API server.
  */
-export async function apply(body: KubeObjectInterface): Promise<JSON> {
+export async function apply(body: KubeObjectInterface, clusterName?: string): Promise<JSON> {
   const bodyToApply = _.cloneDeep(body);
 
   let apiEndpoint;
   try {
-    apiEndpoint = await resourceDefToApiFactory(bodyToApply);
+    apiEndpoint = await resourceDefToApiFactory(bodyToApply, clusterName);
   } catch (err) {
     console.error(`Error getting api endpoint when applying the resource ${bodyToApply}: ${err}`);
     throw err;
   }
+
+  const cluster = clusterName || getCluster();
 
   // Check if the default namespace is needed. And we need to do this before
   // getting the apiEndpoint because it will affect the endpoint itself.
@@ -1305,7 +1505,6 @@ export async function apply(body: KubeObjectInterface): Promise<JSON> {
   if (!namespace && isNamespaced) {
     let defaultNamespace = 'default';
 
-    const cluster = getCluster();
     if (!!cluster) {
       defaultNamespace = getClusterDefaultNamespace(cluster) || 'default';
     }
@@ -1317,7 +1516,7 @@ export async function apply(body: KubeObjectInterface): Promise<JSON> {
 
   try {
     delete bodyToApply.metadata.resourceVersion;
-    return await apiEndpoint.post(bodyToApply);
+    return await apiEndpoint.post(bodyToApply, {}, cluster);
   } catch (err) {
     // Check to see if failed because the record already exists.
     // If the failure isn't a 409 (i.e. Confilct), just rethrow.
@@ -1326,7 +1525,7 @@ export async function apply(body: KubeObjectInterface): Promise<JSON> {
     // Preserve the resourceVersion if its an update request
     bodyToApply.metadata.resourceVersion = resourceVersion;
     // We had a conflict. Try a PUT
-    return apiEndpoint.put(bodyToApply);
+    return apiEndpoint.put(bodyToApply, {}, cluster);
   }
 }
 
@@ -1342,19 +1541,23 @@ export interface ApiError extends Error {
  * @param url - The url of the resource to get metrics for.
  * @param onMetrics - The function to call with the metrics.
  * @param onError - The function to call if there's an error.
+ * @param cluster - The cluster to get metrics for. By default uses the current cluster (URL defined).
  *
  * @returns A function to cancel the metrics request.
  */
 export async function metrics(
   url: string,
   onMetrics: (arg: KubeMetrics[]) => void,
-  onError?: (err: ApiError) => void
+  onError?: (err: ApiError) => void,
+  cluster?: string
 ) {
   const handle = setInterval(getMetrics, 10000);
 
+  const clusterName = cluster || getCluster();
+
   async function getMetrics() {
     try {
-      const metric = await request(url);
+      const metric = await clusterRequest(url, { cluster: clusterName });
       onMetrics(metric.items || metric);
     } catch (err) {
       if (isDebugVerbose('k8s/apiProxy@metrics')) {
@@ -1376,24 +1579,38 @@ export async function metrics(
   return cancel;
 }
 
-export async function testAuth() {
+export async function testAuth(cluster = '') {
   const spec = { namespace: 'default' };
+  const clusterName = cluster || getCluster();
+
   return post('/apis/authorization.k8s.io/v1/selfsubjectrulesreviews', { spec }, false, {
     timeout: 5 * 1000,
+    cluster: clusterName,
   });
 }
 
-export async function testClusterHealth() {
-  return request('/healthz', { isJSON: false });
+export async function testClusterHealth(cluster?: string) {
+  const clusterName = cluster || getCluster() || '';
+  return clusterRequest('/healthz', { isJSON: false, cluster: clusterName });
 }
 
 export async function setCluster(clusterReq: ClusterRequest) {
+  const kubeconfig = clusterReq.kubeconfig;
+
+  if (kubeconfig) {
+    await storeStatelessClusterKubeconfig(kubeconfig);
+    return;
+  }
+
   return request(
     '/cluster',
     {
       method: 'POST',
       body: JSON.stringify(clusterReq),
-      headers: { ...JSON_HEADERS, ...getHeadlampAPIHeaders() },
+      headers: {
+        ...JSON_HEADERS,
+        ...getHeadlampAPIHeaders(),
+      },
     },
     false,
     false
@@ -1612,4 +1829,26 @@ function getClusterDefaultNamespace(cluster: string, checkSettings?: boolean): s
   }
 
   return defaultNamespace;
+}
+
+/**
+ * Deletes the plugin with the specified name from the system. This function sends a DELETE request to the server's plugin management endpoint, targeting the plugin identified by its name.The function handles the request asynchronously and returns a promise that resolves with the server's response to the DELETE operation.
+ *
+ * @param {string} name - The unique name of the plugin to delete. This identifier is used to construct the URL for the DELETE request.
+ * @returns — A Promise that resolves to the JSON response from the API server.
+ * @throws — An ApiError if the response status is not ok.
+ *
+ * @example
+ * // Call to delete a plugin named 'examplePlugin'
+ * deletePlugin('examplePlugin')
+ *   .then(response => console.log('Plugin deleted successfully', response))
+ *   .catch(error => console.error('Failed to delete plugin', error));
+ */
+export function deletePlugin(name: string) {
+  return request(
+    `/plugins/${name}`,
+    { method: 'DELETE', headers: { ...getHeadlampAPIHeaders() } },
+    false,
+    false
+  );
 }

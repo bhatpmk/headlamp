@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 import { KubeObjectClass } from '../../lib/k8s/cluster';
 import { KubeObject } from '../../lib/k8s/cluster';
 import Event from '../../lib/k8s/event';
@@ -73,6 +73,7 @@ export default {
 interface MockerStory {
   useGet?: KubeObjectClass['useGet'];
   useList?: KubeObjectClass['useList'];
+  allowEdit?: boolean;
 }
 
 const Template: Story = (args: MockerStory) => {
@@ -86,6 +87,13 @@ const Template: Story = (args: MockerStory) => {
   if (!!args.useList) {
     PDB.useList = args.useList;
   }
+  if (!!args.allowEdit) {
+    PDB.getAuthorization = (): Promise<{ status: any }> => {
+      return new Promise(resolve => {
+        resolve({ status: { allowed: true, reason: '', code: 200 } });
+      });
+    };
+  }
 
   return <HPADetails />;
 };
@@ -93,6 +101,7 @@ const Template: Story = (args: MockerStory) => {
 export const Default = Template.bind({});
 Default.args = {
   useGet: usePhonyGet,
+  allowEdit: true,
 };
 
 export const NoItemYet = Template.bind({});

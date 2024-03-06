@@ -1,6 +1,7 @@
 import { has } from 'lodash';
 import React from 'react';
 import { AppLogoProps, AppLogoType } from '../components/App/AppLogo';
+import { runCommand } from '../components/App/runCommand';
 import { setBrandingAppLogoComponent } from '../components/App/themeSlice';
 import { ClusterChooserProps, ClusterChooserType } from '../components/cluster/ClusterChooser';
 import {
@@ -35,8 +36,33 @@ import {
   setDetailsViewHeaderAction,
 } from '../redux/actionButtonsSlice';
 import { setClusterChooserButtonComponent, setFunctionsToOverride } from '../redux/actions/actions';
+import {
+  addEventCallback,
+  CreateResourceEvent,
+  DeleteResourceEvent,
+  EditResourceEvent,
+  ErrorBoundaryEvent,
+  EventListEvent,
+  HeadlampEvent,
+  HeadlampEventCallback,
+  HeadlampEventType,
+  LogsEvent,
+  PluginLoadingErrorEvent,
+  PluginsLoadedEvent,
+  PodAttachEvent,
+  ResourceDetailsViewLoadedEvent,
+  ResourceListViewLoadedEvent,
+  RestartResourceEvent,
+  ScaleResourceEvent,
+  TerminalEvent,
+} from '../redux/headlampEventSlice';
 import { setRoute, setRouteFilter } from '../redux/routesSlice';
 import store from '../redux/stores/store';
+import {
+  PluginSettingsComponentType,
+  PluginSettingsDetailsProps,
+  setPluginSettingsComponent,
+} from './pluginsSlice';
 
 export interface SectionFuncProps {
   title: string;
@@ -52,7 +78,26 @@ export type {
   DetailsViewSectionProps,
   DetailsViewSectionType,
   SidebarEntryProps,
+  HeadlampEventCallback,
+  HeadlampEvent,
+  ErrorBoundaryEvent,
+  DeleteResourceEvent,
+  EditResourceEvent,
+  ScaleResourceEvent,
+  RestartResourceEvent,
+  LogsEvent,
+  TerminalEvent,
+  PodAttachEvent,
+  CreateResourceEvent,
+  PluginLoadingErrorEvent,
+  PluginsLoadedEvent,
+  ResourceDetailsViewLoadedEvent,
+  ResourceListViewLoadedEvent,
+  EventListEvent,
+  PluginSettingsDetailsProps,
+  PluginSettingsComponentType,
 };
+export const DefaultHeadlampEvents = HeadlampEventType;
 export const DetailsViewDefaultHeaderActions = DefaultHeaderAction;
 export type { AppBarActionProcessorType };
 /**
@@ -559,4 +604,80 @@ export function registerGetTokenFunction(override: (cluster: string) => string |
   store.dispatch(setFunctionsToOverride({ getToken: override }));
 }
 
-export { DefaultAppBarAction, DefaultDetailsViewSection, getHeadlampAPIHeaders };
+/**
+ * Add a callback for headlamp events.
+ * @param callback - The callback to add.
+ *
+ * @example
+ *
+ * ```ts
+ * import {
+ *   DefaultHeadlampEvents,
+ *   registerHeadlampEventCallback,
+ *   HeadlampEvent,
+ * } from '@kinvolk/headlamp-plugin/lib';
+ *
+ * registerHeadlampEventCallback((event: HeadlampEvent) => {
+ *   if (event.type === DefaultHeadlampEvents.ERROR_BOUNDARY) {
+ *     console.error('Error:', event.data);
+ *   } else {
+ *     console.log(`Headlamp event of type ${event.type}: ${event.data}`)
+ *   }
+ * });
+ * ```
+ */
+export function registerHeadlampEventCallback(callback: HeadlampEventCallback) {
+  store.dispatch(addEventCallback(callback));
+}
+
+/**
+ * Register a plugin settings component.
+ *
+ * @param name - The name of the plugin.
+ * @param component - The component to use for the settings.
+ * @param displaySaveButton - Whether to display the save button.
+ * @returns void
+ *
+ * @example
+ *
+ * ```tsx
+ * import { registerPluginSettings } from '@kinvolk/headlamp-plugin/lib';
+ * import { TextField } from '@mui/material';
+ *
+ * function MyPluginSettingsComponent(props: PluginSettingsDetailsProps) {
+ *   const { data, onDataChange } = props;
+ *
+ *   function onChange(value: string) {
+ *     if (onDataChange) {
+ *       onDataChange({ works: value });
+ *     }
+ *   }
+ *
+ *   return (
+ *     <TextField
+ *       value={data?.works || ''}
+ *       onChange={e => onChange(e.target.value)}
+ *       label="Normal Input"
+ *       variant="outlined"
+ *       fullWidth
+ *     />
+ *   );
+ * }
+ *
+ * const displaySaveButton = true;
+ * // Register a plugin settings component.
+ * registerPluginSettings('my-plugin', MyPluginSettingsComponent, displaySaveButton);
+ * ```
+ *
+ * More complete plugin settings example in plugins/examples/change-logo:
+ * @see {@link https://github.com/headlamp-k8s/headlamp/tree/main/plugins/examples/change-logo Change Logo Example}
+ */
+export function registerPluginSettings(
+  name: string,
+  component: PluginSettingsComponentType,
+  displaySaveButton: boolean = false
+) {
+  store.dispatch(setPluginSettingsComponent({ name, component, displaySaveButton }));
+}
+
+export { DefaultAppBarAction, DefaultDetailsViewSection, getHeadlampAPIHeaders, runCommand };

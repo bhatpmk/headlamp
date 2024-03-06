@@ -11,13 +11,17 @@ import IconButton from '@mui/material/IconButton';
 import MuiInput from '@mui/material/Input';
 import { styled, useTheme } from '@mui/material/styles';
 import Tooltip from '@mui/material/Tooltip';
-import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { KubeObject } from '../../../lib/k8s/cluster';
 import { CallbackActionOptions, clusterAction } from '../../../redux/clusterActionSlice';
+import {
+  EventStatus,
+  HeadlampEventType,
+  useEventCallback,
+} from '../../../redux/headlampEventSlice';
 import { LightTooltip } from '../Tooltip';
 import AuthVisible from './AuthVisible';
 
@@ -82,8 +86,9 @@ export default function ScaleButton(props: ScaleButtonProps) {
       <Tooltip title={t('translation|Scale') as string}>
         <IconButton
           aria-label={t('translation|scale')}
-          onClick={() => setOpenDialog(true)}
-          size="medium"
+          onClick={() => {
+            setOpenDialog(true);
+          }}
         >
           <Icon icon="mdi:content-copy" />
         </IconButton>
@@ -111,31 +116,14 @@ const Input = styled(MuiInput)({
   width: '80px',
 });
 
-const useScaleDialogStyle = makeStyles(() => ({
-  dialogContent: {
-    paddingBottom: '30px', // Prevent the content from overflowing
-  },
-  replicasNumberInput: {
-    marginLeft: '6px',
-    marginRight: '6px',
-  },
-  replicasSwitcher: {
-    padding: '6px',
-    textAlign: 'left',
-  },
-  desiredReplicasText: {
-    minWidth: '250px',
-  },
-}));
-
 function ScaleDialog(props: ScaleDialogProps) {
   const { open, resource, onClose, onSave } = props;
   const [numReplicas, setNumReplicas] = React.useState<number>(getNumReplicas());
   const { t } = useTranslation(['translation']);
-  const classes = useScaleDialogStyle();
   const theme = useTheme();
   const desiredNumReplicasLabel = 'desired-number-replicas-label';
   const numReplicasForWarning = 100;
+  const dispatchHeadlampEvent = useEventCallback(HeadlampEventType.SCALE_RESOURCE);
 
   function getNumReplicas() {
     if (!resource?.spec) {
@@ -150,7 +138,11 @@ function ScaleDialog(props: ScaleDialogProps) {
   return (
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
       <DialogTitle>{t('Scale Replicas')}</DialogTitle>
-      <DialogContent className={classes.dialogContent}>
+      <DialogContent
+        sx={{
+          paddingBottom: '30px', // Prevent the content from overflowing
+        }}
+      >
         <Grid container spacing={5}>
           <Grid item xs={12}>
             <DialogContentText>
@@ -162,14 +154,11 @@ function ScaleDialog(props: ScaleDialogProps) {
           </Grid>
           <Grid item container alignItems="center" spacing={1}>
             <Grid item sm="auto" xs={12}>
-              <DialogContentText
-                id={desiredNumReplicasLabel}
-                className={classes.desiredReplicasText}
-              >
+              <DialogContentText id={desiredNumReplicasLabel} sx={{ minWidth: '250px' }}>
                 {t('translation|Desired number of replicas:')}
               </DialogContentText>
             </Grid>
-            <Grid item spacing={2} sm="auto" className={classes.replicasSwitcher}>
+            <Grid item spacing={2} sm="auto" sx={{ padding: '6px', textAlign: 'left' }}>
               <Fab
                 size="small"
                 color="primary"
@@ -181,7 +170,7 @@ function ScaleDialog(props: ScaleDialogProps) {
               <Input
                 type="number"
                 value={numReplicas}
-                className={classes.replicasNumberInput}
+                sx={{ marginLeft: '6px', marginRight: '6px' }}
                 onChange={e => setNumReplicas(Number(e.target.value))}
                 aria-labelledby={desiredNumReplicasLabel}
                 inputProps={{
@@ -216,7 +205,16 @@ function ScaleDialog(props: ScaleDialogProps) {
         <Button onClick={onClose} color="primary">
           {t('translation|Cancel')}
         </Button>
-        <Button onClick={() => onSave(numReplicas)} color="primary">
+        <Button
+          onClick={() => {
+            onSave(numReplicas);
+            dispatchHeadlampEvent({
+              resource: resource,
+              status: EventStatus.CONFIRMED,
+            });
+          }}
+          color="primary"
+        >
           {t('translation|Apply')}
         </Button>
       </DialogActions>

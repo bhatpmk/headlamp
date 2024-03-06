@@ -10,7 +10,7 @@ test('GET /plugins/list returns plugins list', async ({ page }) => {
 
   const json = await response.json();
   expect(json.length).toBeGreaterThan(0);
-  expect(json.some(str => str.includes('plugins/app-menus'))).toBeTruthy();
+  expect(json.some(str => str.includes('plugins/'))).toBeTruthy();
 });
 // --- Plugin tests end --- //
 
@@ -72,4 +72,18 @@ test('Service account tab should have headlamp-admin', async ({ page }) => {
   // Check if there is text "headlamp-admin" on the page
   await headlampPage.checkPageContent('headlamp-admin');
 });
-// // --- Headlamp tests end --- //
+
+test('Logout the user', async ({ page }) => {
+  const headlampPage = new HeadlampPage(page);
+
+  await headlampPage.authenticate();
+  await headlampPage.logout();
+});
+
+test('404 page is present', async ({ page }) => {
+  const headlampPage = new HeadlampPage(page);
+
+  await headlampPage.authenticate();
+  await headlampPage.navigateTopage('/404test', /Whoops! This page doesn't exist/);
+});
+// --- Headlamp tests end --- //

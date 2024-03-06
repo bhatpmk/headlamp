@@ -172,8 +172,28 @@ function storeNotifications(
  * @returns An array of NotificationIface objects from localStorage.
  */
 export function loadNotifications(): NotificationIface[] {
-  const notifications = JSON.parse(localStorage.getItem('notifications') || '[]');
+  const localStorageItem = global.localStorage.getItem('notifications');
+  const notifications = JSON.parse(localStorageItem || '[]');
+
+  // getting an error here .map is not a function here some times, so we return [] to handle this
+  if (!Array.isArray(notifications)) {
+    return [];
+  }
+
   return notifications.map((n: any) => Notification.fromJSON(n).toJSON());
+}
+
+function mergeNotifications(
+  oldNotifications: NotificationIface[],
+  newNotifications: NotificationIface[]
+) {
+  let notifications = _.uniqBy([...newNotifications, ...oldNotifications], 'id');
+  notifications.sort((n1, n2) => new Date(n2.date).getTime() - new Date(n1.date).getTime());
+  // We limit the number of notifications here even though we also do it when storing them
+  // so we can check if the notifications are the same and avoid updating them in that case.
+  notifications = notifications.slice(0, defaultMaxNotificationsStored);
+
+  return notifications;
 }
 
 const notificationsSlice = createSlice({
@@ -197,8 +217,13 @@ const notificationsSlice = createSlice({
         };
       }
 
-      notifications = _.uniqBy([...notifications, ...state.notifications], 'id');
-      notifications.sort((n1, n2) => new Date(n2.date).getTime() - new Date(n1.date).getTime());
+      notifications = mergeNotifications(state.notifications, notifications);
+
+      // Check if the events are the same, if so, don't update the state unless
+      // needed. This saves unnecessary re-renders and may also prevent infinite loops.
+      if (_.isEqual(notifications, state.notifications)) {
+        return state;
+      }
 
       return {
         notifications: storeNotifications(notifications),
@@ -213,7 +238,7 @@ const notificationsSlice = createSlice({
         ? action.payload
         : [action.payload];
 
-      const updatedState = state.notifications.map(notification => {
+      let updatedState = state.notifications.map(notification => {
         const updatedNotification = dispatchedNotifications.find(n => n.id === notification.id);
         return updatedNotification
           ? Notification.fromJSON({ ...updatedNotification, seen: true })
@@ -223,7 +248,8 @@ const notificationsSlice = createSlice({
       const newNotifications = dispatchedNotifications.filter(
         n => !updatedState.some(s => s.id === n.id)
       );
-      updatedState.push(...newNotifications);
+
+      updatedState = mergeNotifications(updatedState, newNotifications);
 
       return {
         notifications: storeNotifications(updatedState),

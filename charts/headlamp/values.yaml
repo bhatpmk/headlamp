@@ -29,6 +29,11 @@ config:
   # -- base url path at which headlamp should run
   baseURL: ""
   oidc:
+    secret:
+      # -- Generate OIDC secret. If true, will generate a secret using .config.oidc.
+      create: true
+      # -- Name of the OIDC secret.
+      name: oidc
     # -- OIDC client ID
     clientID: ""
     # -- OIDC client secret
@@ -39,6 +44,13 @@ config:
     scopes: ""
   # -- directory to look for plugins
   pluginsDir: "/headlamp/plugins"
+
+# -- An optional list of environment variables
+# env:
+  # - name: KUBERNETES_SERVICE_HOST
+  #   value: localhost
+  # - name: KUBERNETES_SERVICE_PORT
+  #   value: 6443
 
 serviceAccount:
   # -- Specifies whether a service account should be created

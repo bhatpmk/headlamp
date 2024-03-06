@@ -124,9 +124,7 @@ func getResponse(handler http.Handler, method, url string, body interface{}) (*h
 	return rr, nil
 }
 
-func getResponseFromRestrictedEndpoint(
-	handler http.Handler, method, url string, body interface{},
-) (*httptest.ResponseRecorder, error) {
+func getResponseFromRestrictedEndpoint(handler http.Handler, method, url string, body interface{}) (*httptest.ResponseRecorder, error) { //nolint:lll
 	token := uuid.New().String()
 	os.Setenv("HEADLAMP_BACKEND_TOKEN", token)
 
@@ -251,6 +249,13 @@ func TestDynamicClusters(t *testing.T) {
 
 				// Verify if the created cluster matches what we asked to be created
 				if r.Code == http.StatusCreated {
+					var config clientConfig
+
+					err = json.Unmarshal(r.Body.Bytes(), &config)
+					if err != nil {
+						t.Fatal(err)
+					}
+
 					configuredClusters := c.getClusters()
 					var cluster *Cluster
 
@@ -289,9 +294,8 @@ func TestDynamicClusters(t *testing.T) {
 				}
 
 				assert.Equal(t, len(clusterConfig.Clusters), len(config.Clusters))
+				assert.Equal(t, tc.expectedNumClusters, len(c.getClusters()))
 			}
-
-			assert.Equal(t, tc.expectedNumClusters, len(c.getClusters()))
 		})
 	}
 }
@@ -491,8 +495,12 @@ func TestDrainAndCordonNode(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		rr, err = getResponse(tc.handler, "GET",
-			fmt.Sprintf("/drain-node-status?cluster=%s&nodeName=%s", drainNodePayload.Cluster, drainNodePayload.NodeName), nil)
+		url := fmt.Sprintf(
+			"/drain-node-status?cluster=%s&nodeName=%s",
+			drainNodePayload.Cluster, drainNodePayload.NodeName,
+		)
+
+		rr, err = getResponse(tc.handler, "GET", url, nil)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -502,4 +510,44 @@ func TestDrainAndCordonNode(t *testing.T) {
 				status, http.StatusOK)
 		}
 	}
+}
+
+func TestDeletePlugin(t *testing.T) {
+	// create temp dir for plugins
+	tempDir, err := os.MkdirTemp("", "plugins")
+	require.NoError(t, err)
+
+	defer os.RemoveAll(tempDir)
+
+	// create plugin
+	pluginDir := tempDir + "/test-plugin"
+	err = os.Mkdir(pluginDir, 0o755)
+	require.NoError(t, err)
+
+	// create plugin file
+	pluginFile := pluginDir + "/main.js"
+	_, err = os.Create(pluginFile)
+	require.NoError(t, err)
+
+	cache := cache.New[interface{}]()
+	kubeConfigStore := kubeconfig.NewContextStore()
+
+	c := HeadlampConfig{
+		useInCluster:    false,
+		kubeConfigPath:  config.GetDefaultKubeConfigPath(),
+		cache:           cache,
+		kubeConfigStore: kubeConfigStore,
+		pluginDir:       tempDir,
+	}
+
+	handler := createHeadlampHandler(&c)
+
+	rr, err := getResponseFromRestrictedEndpoint(handler, "DELETE", "/plugins/test-plugin", nil)
+	require.NoError(t, err)
+
+	assert.Equal(t, http.StatusOK, rr.Code)
+
+	// check if plugin was deleted
+	_, err = os.Stat(pluginDir)
+	assert.True(t, os.IsNotExist(err))
 }

@@ -5,6 +5,9 @@
  */
 import semver from 'semver';
 import helpers from '../helpers';
+import { eventAction, HeadlampEventType } from '../redux/headlampEventSlice';
+import store from '../redux/stores/store';
+import { ConfigStore } from './configStore';
 import { Headlamp, Plugin } from './lib';
 import { PluginInfo } from './pluginsSlice';
 import Registry, * as registryToExport from './registry';
@@ -16,6 +19,7 @@ window.pluginLib = {
     ? 'monaco-editor/esm/vs/editor/editor.api.js'
     : 'monaco-editor'),
   K8s: require('../lib/k8s'),
+  ConfigStore: ConfigStore,
   // Anything that is part of the lib/k8s/ folder should be imported after the K8s import, to
   // avoid circular dependencies' issues.
   Crd: require('../lib/k8s/crd'),
@@ -206,11 +210,13 @@ export function updateSettingsPackages(
  *
  * @param settingsPackages The packages settings knows about.
  * @param onSettingsChange Called when the plugins are different to what is in settings.
+ * @param onIncompatible Called when there are incompatible plugins.
  *
  */
 export async function fetchAndExecutePlugins(
   settingsPackages: PluginInfo[],
-  onSettingsChange: (plugins: PluginInfo[]) => void
+  onSettingsChange: (plugins: PluginInfo[]) => void,
+  onIncompatible: (plugins: Record<string, PluginInfo>) => void
 ) {
   const pluginPaths = (await fetch(`${helpers.getAppUrl()}plugins`).then(resp =>
     resp.json()
@@ -271,12 +277,16 @@ export async function fetchAndExecutePlugins(
   );
 
   if (Object.keys(incompatiblePlugins).length > 0) {
-    console.warn(
-      'The following plugins are not compatible and will not be executed:' +
-        Object.values(incompatiblePlugins)
-          .map(p => p.name)
-          .join(', ')
+    onIncompatible(incompatiblePlugins);
+    const packagesIncompatibleSet: PluginInfo[] = updatedSettingsPackages.map(
+      (plugin: PluginInfo) => {
+        return {
+          ...plugin,
+          isCompatible: !incompatiblePlugins[plugin.name],
+        };
+      }
     );
+    onSettingsChange(packagesIncompatibleSet);
   }
 
   sourcesToExecute.forEach((source, index) => {
@@ -288,8 +298,30 @@ export async function fetchAndExecutePlugins(
       } catch (e) {
         // We just continue if there is an error.
         console.error(`Plugin execution error in ${pluginPaths[index]}:`, e);
+        store.dispatch(
+          eventAction({
+            type: HeadlampEventType.PLUGIN_LOADING_ERROR,
+            data: {
+              pluginInfo: { name: packageInfos[index].name, version: packageInfos[index].version },
+              error: e,
+            },
+          })
+        );
       }
-    }.call({}, source));
+    }).call({}, source);
   });
   await initializePlugins();
+
+  const pluginsLoaded = updatedSettingsPackages.map(plugin => ({
+    name: plugin.name,
+    version: plugin.version,
+    isEnabled: plugin.isEnabled,
+  }));
+
+  store.dispatch(
+    eventAction({
+      type: HeadlampEventType.PLUGINS_LOADED,
+      data: { plugins: pluginsLoaded },
+    })
+  );
 }

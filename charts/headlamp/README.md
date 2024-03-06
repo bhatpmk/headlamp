@@ -28,6 +28,7 @@ See [MAINTAINERS.md](https://github.com/headlamp-k8s/headlamp/blob/main/MAINTAIN
 | affinity | object | `{}` | Affinity settings for pod assignment |
 | clusterRoleBinding.annotations | object | `{}` | Annotations to add to the cluster role binding |
 | clusterRoleBinding.create | bool | `true` | Specified whether a cluster role binding should be created |
+| env | list | `[]` | An optional list of environment variables |
 | fullnameOverride | string | `""` | Overrides the full name of the chart |
 | image.pullPolicy | string | `"IfNotPresent"` | Image pull policy. One of Always, Never, IfNotPresent |
 | image.registry | string | `"ghcr.io"` | Container image registry |
@@ -65,11 +66,13 @@ See [MAINTAINERS.md](https://github.com/headlamp-k8s/headlamp/blob/main/MAINTAIN
 
 ### Headlamp Configuration
 
-| Key                      | Type   | Default               | Description                                |
-|--------------------------|--------|-----------------------|--------------------------------------------|
-| config.baseURL           | string | `""`                  | base url path at which headlamp should run |
-| config.oidc.clientID     | string | `""`                  | OIDC client ID                             |
-| config.oidc.clientSecret | string | `""`                  | OIDC client secret                         |
-| config.oidc.issuerURL    | string | `""`                  | OIDC issuer URL                            |
-| config.oidc.scopes       | string | `""`                  | OIDC scopes to be used                     |
-| config.pluginsDir        | string | `"/headlamp/plugins"` | directory to look for plugins              |
+| Key                       | Type   | Default               | Description                                |
+|---------------------------|--------|-----------------------|--------------------------------------------|
+| config.baseURL            | string | `""`                  | base url path at which headlamp should run |
+| config.oidc.clientID      | string | `""`                  | OIDC client ID                             |
+| config.oidc.clientSecret  | string | `""`                  | OIDC client secret                         |
+| config.oidc.issuerURL     | string | `""`                  | OIDC issuer URL                            |
+| config.oidc.scopes        | string | `""`                  | OIDC scopes to be used                     |
+| config.oidc.secret.create | bool   | `true`                | Enable this option to have the chart automatically create the OIDC secret using the specified values. |
+| config.oidc.secret.name   | string | `oidc`                | Name of the OIDC secret used by headlamp   |
+| config.pluginsDir         | string | `"/headlamp/plugins"` | directory to look for plugins              |

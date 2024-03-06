@@ -4,7 +4,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Switch from '@mui/material/Switch';
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/system';
 import _ from 'lodash';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -13,6 +13,7 @@ import { Terminal as XTerminal } from 'xterm';
 import { KubeContainerStatus } from '../../lib/k8s/cluster';
 import Pod from '../../lib/k8s/pod';
 import { DefaultHeaderAction } from '../../redux/actionButtonsSlice';
+import { EventStatus, HeadlampEventType, useEventCallback } from '../../redux/headlampEventSlice';
 import { ActionButton, LightTooltip, SectionBox, SimpleTable } from '../common';
 import Link from '../common/Link';
 import { LogViewer, LogViewerProps } from '../common/LogViewer';
@@ -26,18 +27,10 @@ import AuthVisible from '../common/Resource/AuthVisible';
 import Terminal from '../common/Terminal';
 import { makePodStatusLabel } from './List';
 
-const useStyle = makeStyles(theme => ({
-  containerFormControl: {
-    minWidth: '11rem',
-  },
-  linesFormControl: {
-    minWidth: '6rem',
-  },
-  switchControl: {
-    margin: 0,
-    paddingTop: theme.spacing(2),
-    paddingRight: theme.spacing(2),
-  },
+const PaddedFormControlLabel = styled(FormControlLabel)(({ theme }) => ({
+  margin: 0,
+  paddingTop: theme.spacing(2),
+  paddingRight: theme.spacing(2),
 }));
 
 interface PodLogViewerProps extends Omit<LogViewerProps, 'logs'> {
@@ -45,7 +38,6 @@ interface PodLogViewerProps extends Omit<LogViewerProps, 'logs'> {
 }
 
 function PodLogViewer(props: PodLogViewerProps) {
-  const classes = useStyle();
   const { item, onClose, open, ...other } = props;
   const [container, setContainer] = React.useState(getDefaultContainer());
   const [showPrevious, setShowPrevious] = React.useState<boolean>(false);
@@ -56,6 +48,8 @@ function PodLogViewer(props: PodLogViewerProps) {
     logs: [],
     lastLineShown: -1,
   });
+  const [showReconnectButton, setShowReconnectButton] = React.useState(false);
+  const [cancelLogsStream, setCancelLogsStream] = React.useState<(() => void) | null>(null);
   const xtermRef = React.useRef<XTerminal | null>(null);
   const { t } = useTranslation();
 
@@ -109,6 +103,13 @@ function PodLogViewer(props: PodLogViewerProps) {
           showPrevious,
           showTimestamps,
           follow,
+          /**
+           * When the connection is lost, show the reconnect button.
+           * This will stop the current log stream.
+           */
+          onReconnectStop: () => {
+            setShowReconnectButton(true);
+          },
         });
       }
 
@@ -153,6 +154,38 @@ function PodLogViewer(props: PodLogViewerProps) {
     setFollow(follow => !follow);
   }
 
+  /**
+   * Handle the reconnect button being clicked.
+   * This will start a new log stream and hide the reconnect button.
+   */
+  function handleReconnect() {
+    // If there's an existing log stream, cancel it
+    if (cancelLogsStream) {
+      cancelLogsStream();
+    }
+
+    // Start a new log stream
+    const newCancelLogsStream = item.getLogs(container, debouncedSetState, {
+      tailLines: lines,
+      showPrevious,
+      showTimestamps,
+      follow,
+      /**
+       * When the connection is lost, show the reconnect button.
+       * This will stop the current log stream.
+       */
+      onReconnectStop: () => {
+        setShowReconnectButton(true);
+      },
+    });
+
+    // Set the cancelLogsStream function to the new one
+    setCancelLogsStream(() => newCancelLogsStream);
+
+    // Hide the reconnect button
+    setShowReconnectButton(false);
+  }
+
   return (
     <LogViewer
       title={t('glossary|Logs: {{ itemName }}', { itemName: item.getName() })}
@@ -161,8 +194,10 @@ function PodLogViewer(props: PodLogViewerProps) {
       onClose={onClose}
       logs={logs.logs}
       xtermRef={xtermRef}
+      handleReconnect={handleReconnect}
+      showReconnectButton={showReconnectButton}
       topActions={[
-        <FormControl className={classes.containerFormControl}>
+        <FormControl sx={{ minWidth: '11rem' }}>
           <InputLabel shrink id="container-name-chooser-label">
             {t('glossary|Container')}
           </InputLabel>
@@ -204,7 +239,7 @@ function PodLogViewer(props: PodLogViewerProps) {
             ))}
           </Select>
         </FormControl>,
-        <FormControl className={classes.linesFormControl}>
+        <FormControl sx={{ minWidth: '6rem' }}>
           <InputLabel shrink id="container-lines-chooser-label">
             {t('translation|Lines')}
           </InputLabel>
@@ -219,6 +254,7 @@ function PodLogViewer(props: PodLogViewerProps) {
                 {i}
               </MenuItem>
             ))}
+            <MenuItem value={-1}>All</MenuItem>
           </Select>
         </FormControl>,
         <LightTooltip
@@ -230,8 +266,7 @@ function PodLogViewer(props: PodLogViewerProps) {
                 )
           }
         >
-          <FormControlLabel
-            className={classes.switchControl}
+          <PaddedFormControlLabel
             label={t('translation|Show previous')}
             disabled={!hasContainerRestarted()}
             control={
@@ -245,8 +280,7 @@ function PodLogViewer(props: PodLogViewerProps) {
             }
           />
         </LightTooltip>,
-        <FormControlLabel
-          className={classes.switchControl}
+        <PaddedFormControlLabel
           label={t('translation|Timestamps')}
           control={
             <Switch
@@ -258,8 +292,7 @@ function PodLogViewer(props: PodLogViewerProps) {
             />
           }
         />,
-        <FormControlLabel
-          className={classes.switchControl}
+        <PaddedFormControlLabel
           label={t('translation|Follow')}
           control={
             <Switch
@@ -355,6 +388,7 @@ export default function PodDetails(props: PodDetailsProps) {
   const [showTerminal, setShowTerminal] = React.useState(false);
   const { t } = useTranslation('glossary');
   const [isAttached, setIsAttached] = React.useState(false);
+  const dispatchHeadlampEvent = useEventCallback();
 
   return (
     <DetailsGrid
@@ -372,7 +406,15 @@ export default function PodDetails(props: PodDetailsProps) {
                   description={t('Show Logs')}
                   aria-label={t('logs')}
                   icon="mdi:file-document-box-outline"
-                  onClick={() => setShowLogs(true)}
+                  onClick={() => {
+                    setShowLogs(true);
+                    dispatchHeadlampEvent({
+                      type: HeadlampEventType.LOGS,
+                      data: {
+                        status: EventStatus.OPENED,
+                      },
+                    });
+                  }}
                 />
               </AuthVisible>
             ),
@@ -385,7 +427,16 @@ export default function PodDetails(props: PodDetailsProps) {
                   description={t('Terminal / Exec')}
                   aria-label={t('terminal')}
                   icon="mdi:console"
-                  onClick={() => setShowTerminal(true)}
+                  onClick={() => {
+                    setShowTerminal(true);
+                    dispatchHeadlampEvent({
+                      type: HeadlampEventType.TERMINAL,
+                      data: {
+                        resource: item,
+                        status: EventStatus.CLOSED,
+                      },
+                    });
+                  }}
                 />
               </AuthVisible>
             ),
@@ -398,7 +449,16 @@ export default function PodDetails(props: PodDetailsProps) {
                   description={t('Attach')}
                   aria-label={t('attach')}
                   icon="mdi:connection"
-                  onClick={() => setIsAttached(true)}
+                  onClick={() => {
+                    setIsAttached(true);
+                    dispatchHeadlampEvent({
+                      type: HeadlampEventType.POD_ATTACH,
+                      data: {
+                        resource: item,
+                        status: EventStatus.OPENED,
+                      },
+                    });
+                  }}
                 />
               </AuthVisible>
             ),
@@ -481,7 +541,16 @@ export default function PodDetails(props: PodDetailsProps) {
                 key="logs"
                 open={showLogs}
                 item={item}
-                onClose={() => setShowLogs(false)}
+                onClose={() => {
+                  dispatchHeadlampEvent({
+                    type: HeadlampEventType.LOGS,
+                    data: {
+                      resource: item,
+                      status: EventStatus.CLOSED,
+                    },
+                  });
+                  setShowLogs(false);
+                }}
               />
             ),
           },
@@ -494,6 +563,13 @@ export default function PodDetails(props: PodDetailsProps) {
                 item={item}
                 onClose={() => {
                   setShowTerminal(false);
+                  dispatchHeadlampEvent({
+                    type: HeadlampEventType.TERMINAL,
+                    data: {
+                      resource: item,
+                      status: EventStatus.CLOSED,
+                    },
+                  });
                   setIsAttached(false);
                 }}
                 isAttach={isAttached}

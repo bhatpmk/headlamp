@@ -150,6 +150,11 @@ make app-linux
 
 For more on how to extract files into there see "Shipping and Deploying Plugins" above.
 
+### More on making a headlamp container image including plugins
+
+See the blog post
+"[Get up to speed deploying Headlamp with plugins](https://headlamp.dev/blog/2022/10/get-up-to-speed-deploying-headlamp-with-plugins/)"
+for more information on building a container image with your plugins.
 
 ## Writing storybook stories
 
@@ -225,7 +230,7 @@ jobs:
         node-version: [18.x]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:

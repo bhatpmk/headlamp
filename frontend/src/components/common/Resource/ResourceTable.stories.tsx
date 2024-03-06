@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 import { KubeObject } from '../../../lib/k8s/cluster';
 import Pod, { KubePod } from '../../../lib/k8s/pod';
 import { INITIAL_STATE as UI_INITIAL_STATE } from '../../../redux/reducers/ui';
@@ -124,6 +124,21 @@ const podData: ResourceTableFromResourceClassProps = {
   resourceClass: MyPod as KubeObject,
 };
 
+const withHiddenCols: ResourceTableFromResourceClassProps = {
+  columns: [
+    'name',
+    'namespace',
+    {
+      label: 'UID',
+      getter: (pod: Pod) => pod.metadata.uid,
+      show: false,
+    },
+    'age',
+  ],
+  resourceClass: MyPod as KubeObject,
+  hideColumns: ['namespace'],
+};
+
 export const NoFilter = TemplateWithFilter.bind({});
 NoFilter.args = {
   resourceTableArgs: podData,
@@ -134,4 +149,10 @@ export const NameSearch = TemplateWithFilter.bind({});
 NameSearch.args = {
   resourceTableArgs: podData,
   search: 'mypod3',
+};
+
+export const WithHiddenCols = TemplateWithFilter.bind({});
+WithHiddenCols.args = {
+  resourceTableArgs: withHiddenCols,
+  search: '',
 };

@@ -14,14 +14,37 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
         <div
           class="MuiBox-root css-70qvj9"
         >
-          <h2
-            class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1c4rm8p-MuiTypography-root"
+          <h1
+            class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1f1i6v9-MuiTypography-root"
           >
             Plugins
-          </h2>
+          </h1>
           <div
             class="MuiBox-root css-ldp2l3"
           />
+        </div>
+      </div>
+      <div
+        class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-container MuiGrid-item css-43x3z6-MuiGrid-root"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+          >
+            <button
+              aria-label="Show filter"
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-whz9ym-MuiButtonBase-root-MuiIconButton-root"
+              tabindex="0"
+              type="button"
+            >
+              <span />
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -41,28 +64,72 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
               class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
             >
               <th
-                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
                 scope="col"
               >
                 Name
+                <button
+                  aria-label="sort swap"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span />
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </button>
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
                 scope="col"
               >
                 Description
+                <button
+                  aria-label="sort swap"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span />
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </button>
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
                 scope="col"
               >
-                Homepage
+                Origin
+                <button
+                  aria-label="sort swap"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span />
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </button>
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
                 scope="col"
               >
-                Enable
+                Status
+                <button
+                  aria-label="sort swap"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span />
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </button>
               </th>
             </tr>
           </thead>
@@ -75,7 +142,19 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 0
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%200"
+                  >
+                    plugin a 0
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -85,35 +164,12 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-0
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 0"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 0"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Enabled
               </td>
             </tr>
             <tr
@@ -122,7 +178,19 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 1
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%201"
+                  >
+                    plugin a 1
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -132,34 +200,12 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-1
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 1"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 1"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -168,7 +214,19 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 2
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%202"
+                  >
+                    plugin a 2
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -178,35 +236,12 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-2
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 2"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 2"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Enabled
               </td>
             </tr>
             <tr
@@ -215,7 +250,19 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 3
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%203"
+                  >
+                    plugin a 3
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -225,34 +272,12 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-3
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 3"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 3"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -261,7 +286,19 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 4
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%204"
+                  >
+                    plugin a 4
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -271,35 +308,12 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-4
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 4"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 4"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Enabled
               </td>
             </tr>
           </tbody>
@@ -308,10 +322,10 @@ exports[`Storyshots Settings/PluginSettings Default Save Enable 1`] = `
     </div>
   </div>
   <div
-    class="makeStyles-saveButtonBox MuiBox-root css-0"
+    class="MuiBox-root css-ova7y8"
   >
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium makeStyles-saveButton css-19g3xkx-MuiButtonBase-root-MuiButton-root"
+      class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-wlshgd-MuiButtonBase-root-MuiButton-root"
       tabindex="0"
       type="button"
     >
@@ -338,14 +352,37 @@ exports[`Storyshots Settings/PluginSettings Empty 1`] = `
         <div
           class="MuiBox-root css-70qvj9"
         >
-          <h2
-            class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1c4rm8p-MuiTypography-root"
+          <h1
+            class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1f1i6v9-MuiTypography-root"
           >
             Plugins
-          </h2>
+          </h1>
           <div
             class="MuiBox-root css-ldp2l3"
           />
+        </div>
+      </div>
+      <div
+        class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-container MuiGrid-item css-43x3z6-MuiGrid-root"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+          >
+            <button
+              aria-label="Show filter"
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-whz9ym-MuiButtonBase-root-MuiIconButton-root"
+              tabindex="0"
+              type="button"
+            >
+              <span />
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -384,14 +421,37 @@ exports[`Storyshots Settings/PluginSettings Empty Homepage Items 1`] = `
         <div
           class="MuiBox-root css-70qvj9"
         >
-          <h2
-            class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1c4rm8p-MuiTypography-root"
+          <h1
+            class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1f1i6v9-MuiTypography-root"
           >
             Plugins
-          </h2>
+          </h1>
           <div
             class="MuiBox-root css-ldp2l3"
           />
+        </div>
+      </div>
+      <div
+        class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-container MuiGrid-item css-43x3z6-MuiGrid-root"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+          >
+            <button
+              aria-label="Show filter"
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-whz9ym-MuiButtonBase-root-MuiIconButton-root"
+              tabindex="0"
+              type="button"
+            >
+              <span />
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -411,28 +471,72 @@ exports[`Storyshots Settings/PluginSettings Empty Homepage Items 1`] = `
               class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
             >
               <th
-                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
                 scope="col"
               >
                 Name
+                <button
+                  aria-label="sort swap"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span />
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </button>
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
                 scope="col"
               >
                 Description
+                <button
+                  aria-label="sort swap"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span />
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </button>
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
                 scope="col"
               >
-                Homepage
+                Origin
+                <button
+                  aria-label="sort swap"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span />
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </button>
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
                 scope="col"
               >
-                Enable
+                Status
+                <button
+                  aria-label="sort swap"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span />
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </button>
               </th>
             </tr>
           </thead>
@@ -445,7 +549,19 @@ exports[`Storyshots Settings/PluginSettings Empty Homepage Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 0
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%200"
+                  >
+                    plugin a 0
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -455,35 +571,12 @@ exports[`Storyshots Settings/PluginSettings Empty Homepage Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-0
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 0"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 0"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Enabled
               </td>
             </tr>
             <tr
@@ -492,7 +585,19 @@ exports[`Storyshots Settings/PluginSettings Empty Homepage Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 1
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%201"
+                  >
+                    plugin a 1
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -502,34 +607,12 @@ exports[`Storyshots Settings/PluginSettings Empty Homepage Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-1
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 1"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 1"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -538,7 +621,19 @@ exports[`Storyshots Settings/PluginSettings Empty Homepage Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 2
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%202"
+                  >
+                    plugin a 2
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -548,35 +643,12 @@ exports[`Storyshots Settings/PluginSettings Empty Homepage Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-2
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 2"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 2"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Enabled
               </td>
             </tr>
             <tr
@@ -585,7 +657,19 @@ exports[`Storyshots Settings/PluginSettings Empty Homepage Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 3
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%203"
+                  >
+                    plugin a 3
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -595,34 +679,12 @@ exports[`Storyshots Settings/PluginSettings Empty Homepage Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-3
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 3"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 3"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -631,7 +693,19 @@ exports[`Storyshots Settings/PluginSettings Empty Homepage Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 4
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%204"
+                  >
+                    plugin a 4
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -641,35 +715,12 @@ exports[`Storyshots Settings/PluginSettings Empty Homepage Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-4
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 4"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 4"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Enabled
               </td>
             </tr>
           </tbody>
@@ -694,14 +745,37 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
         <div
           class="MuiBox-root css-70qvj9"
         >
-          <h2
-            class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1c4rm8p-MuiTypography-root"
+          <h1
+            class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1f1i6v9-MuiTypography-root"
           >
             Plugins
-          </h2>
+          </h1>
           <div
             class="MuiBox-root css-ldp2l3"
           />
+        </div>
+      </div>
+      <div
+        class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-container MuiGrid-item css-43x3z6-MuiGrid-root"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+          >
+            <button
+              aria-label="Show filter"
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-whz9ym-MuiButtonBase-root-MuiIconButton-root"
+              tabindex="0"
+              type="button"
+            >
+              <span />
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -721,28 +795,72 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
               class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
             >
               <th
-                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
                 scope="col"
               >
                 Name
+                <button
+                  aria-label="sort swap"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span />
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </button>
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
                 scope="col"
               >
                 Description
+                <button
+                  aria-label="sort swap"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span />
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </button>
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
                 scope="col"
               >
-                Homepage
+                Origin
+                <button
+                  aria-label="sort swap"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span />
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </button>
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
                 scope="col"
               >
-                Enable
+                Status
+                <button
+                  aria-label="sort swap"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span />
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </button>
               </th>
             </tr>
           </thead>
@@ -755,7 +873,19 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 0
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%200"
+                  >
+                    plugin a 0
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -765,35 +895,12 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-0
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 0"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 0"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Enabled
               </td>
             </tr>
             <tr
@@ -802,7 +909,19 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 1
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%201"
+                  >
+                    plugin a 1
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -812,34 +931,12 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-1
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 1"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 1"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -848,7 +945,19 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 2
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%202"
+                  >
+                    plugin a 2
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -858,35 +967,12 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-2
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 2"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 2"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Enabled
               </td>
             </tr>
             <tr
@@ -895,7 +981,19 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 3
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%203"
+                  >
+                    plugin a 3
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -905,34 +1003,12 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-3
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 3"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 3"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -941,7 +1017,19 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 4
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%204"
+                  >
+                    plugin a 4
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -951,35 +1039,12 @@ exports[`Storyshots Settings/PluginSettings Few Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-4
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 4"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 4"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Enabled
               </td>
             </tr>
           </tbody>
@@ -1004,14 +1069,37 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
         <div
           class="MuiBox-root css-70qvj9"
         >
-          <h2
-            class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1c4rm8p-MuiTypography-root"
+          <h1
+            class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1f1i6v9-MuiTypography-root"
           >
             Plugins
-          </h2>
+          </h1>
           <div
             class="MuiBox-root css-ldp2l3"
           />
+        </div>
+      </div>
+      <div
+        class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-container MuiGrid-item css-43x3z6-MuiGrid-root"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+          >
+            <button
+              aria-label="Show filter"
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-whz9ym-MuiButtonBase-root-MuiIconButton-root"
+              tabindex="0"
+              type="button"
+            >
+              <span />
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -1031,28 +1119,72 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
             >
               <th
-                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
                 scope="col"
               >
                 Name
+                <button
+                  aria-label="sort swap"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span />
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </button>
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
                 scope="col"
               >
                 Description
+                <button
+                  aria-label="sort swap"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span />
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </button>
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
                 scope="col"
               >
-                Homepage
+                Origin
+                <button
+                  aria-label="sort swap"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span />
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </button>
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
                 scope="col"
               >
-                Enable
+                Status
+                <button
+                  aria-label="sort swap"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span />
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </button>
               </th>
             </tr>
           </thead>
@@ -1065,7 +1197,19 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 0
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%200"
+                  >
+                    plugin a 0
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -1075,35 +1219,12 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-0
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 0"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 0"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Enabled
               </td>
             </tr>
             <tr
@@ -1112,7 +1233,19 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 1
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%201"
+                  >
+                    plugin a 1
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -1122,34 +1255,12 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-1
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 1"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 1"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -1158,7 +1269,19 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 2
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%202"
+                  >
+                    plugin a 2
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -1168,35 +1291,12 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-2
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 2"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 2"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Enabled
               </td>
             </tr>
             <tr
@@ -1205,7 +1305,19 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 3
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%203"
+                  >
+                    plugin a 3
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -1215,34 +1327,12 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-3
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 3"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 3"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -1251,7 +1341,19 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 4
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%204"
+                  >
+                    plugin a 4
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -1261,35 +1363,12 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-4
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 4"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 4"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Enabled
               </td>
             </tr>
             <tr
@@ -1298,7 +1377,19 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 5
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%205"
+                  >
+                    plugin a 5
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -1308,34 +1399,12 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-5
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 5"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 5"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -1344,7 +1413,19 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 6
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%206"
+                  >
+                    plugin a 6
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -1354,35 +1435,12 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-6
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 6"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 6"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Enabled
               </td>
             </tr>
             <tr
@@ -1391,7 +1449,19 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 7
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%207"
+                  >
+                    plugin a 7
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -1401,34 +1471,12 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-7
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 7"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 7"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -1437,7 +1485,19 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 8
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%208"
+                  >
+                    plugin a 8
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -1447,35 +1507,12 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-8
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 8"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 8"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Enabled
               </td>
             </tr>
             <tr
@@ -1484,7 +1521,19 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 9
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%209"
+                  >
+                    plugin a 9
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -1494,34 +1543,12 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-9
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 9"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 9"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -1530,7 +1557,19 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 10
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%2010"
+                  >
+                    plugin a 10
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -1540,35 +1579,12 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-10
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 10"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 10"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Enabled
               </td>
             </tr>
             <tr
@@ -1577,7 +1593,19 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 11
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%2011"
+                  >
+                    plugin a 11
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -1587,34 +1615,12 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-11
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 11"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 11"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -1623,7 +1629,19 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 12
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%2012"
+                  >
+                    plugin a 12
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -1633,35 +1651,12 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-12
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 12"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 12"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Enabled
               </td>
             </tr>
             <tr
@@ -1670,7 +1665,19 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 13
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%2013"
+                  >
+                    plugin a 13
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -1680,34 +1687,12 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-13
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 13"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 13"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -1716,7 +1701,19 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 14
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%2014"
+                  >
+                    plugin a 14
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -1726,35 +1723,12 @@ exports[`Storyshots Settings/PluginSettings Many Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-14
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 14"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 14"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Enabled
               </td>
             </tr>
           </tbody>
@@ -1779,14 +1753,37 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
         <div
           class="MuiBox-root css-70qvj9"
         >
-          <h2
-            class="MuiTypography-root MuiTypography-h2 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1c4rm8p-MuiTypography-root"
+          <h1
+            class="MuiTypography-root MuiTypography-h1 MuiTypography-noWrap makeStyles-sectionTitle makeStyles-sectionTitle css-1f1i6v9-MuiTypography-root"
           >
             Plugins
-          </h2>
+          </h1>
           <div
             class="MuiBox-root css-ldp2l3"
           />
+        </div>
+      </div>
+      <div
+        class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-container MuiGrid-item css-43x3z6-MuiGrid-root"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+          >
+            <button
+              aria-label="Show filter"
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-whz9ym-MuiButtonBase-root-MuiIconButton-root"
+              tabindex="0"
+              type="button"
+            >
+              <span />
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -1806,28 +1803,72 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               class="MuiTableRow-root MuiTableRow-head css-73w7uv-MuiTableRow-root"
             >
               <th
-                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
                 scope="col"
               >
                 Name
+                <button
+                  aria-label="sort swap"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span />
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </button>
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
                 scope="col"
               >
                 Description
+                <button
+                  aria-label="sort swap"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span />
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </button>
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
                 scope="col"
               >
-                Homepage
+                Origin
+                <button
+                  aria-label="sort swap"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span />
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </button>
               </th>
               <th
-                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell css-1ciaiyl-MuiTableCell-root"
+                class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeSmall makeStyles-headerCell makeStyles-sortCell css-1ciaiyl-MuiTableCell-root"
                 scope="col"
               >
-                Enable
+                Status
+                <button
+                  aria-label="sort swap"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-hvz71z-MuiButtonBase-root-MuiIconButton-root"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span />
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </button>
               </th>
             </tr>
           </thead>
@@ -1840,7 +1881,19 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 0
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%200"
+                  >
+                    plugin a 0
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -1850,35 +1903,12 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-0
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 0"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 0"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Enabled
               </td>
             </tr>
             <tr
@@ -1887,7 +1917,19 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 1
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%201"
+                  >
+                    plugin a 1
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -1897,34 +1939,12 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-1
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 1"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 1"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -1933,7 +1953,19 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 2
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%202"
+                  >
+                    plugin a 2
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -1943,35 +1975,12 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-2
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 2"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 2"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Enabled
               </td>
             </tr>
             <tr
@@ -1980,7 +1989,19 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 3
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%203"
+                  >
+                    plugin a 3
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -1990,34 +2011,12 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-3
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 3"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 3"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -2026,7 +2025,19 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 4
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%204"
+                  >
+                    plugin a 4
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -2036,35 +2047,12 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-4
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 4"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 4"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Enabled
               </td>
             </tr>
             <tr
@@ -2073,7 +2061,19 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 5
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%205"
+                  >
+                    plugin a 5
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -2083,34 +2083,12 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-5
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 5"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 5"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -2119,7 +2097,19 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 6
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%206"
+                  >
+                    plugin a 6
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -2129,35 +2119,12 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-6
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 6"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 6"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Enabled
               </td>
             </tr>
             <tr
@@ -2166,7 +2133,19 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 7
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%207"
+                  >
+                    plugin a 7
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -2176,34 +2155,12 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-7
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 7"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 7"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -2212,7 +2169,19 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 8
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%208"
+                  >
+                    plugin a 8
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -2222,35 +2191,12 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-8
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 8"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 8"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Enabled
               </td>
             </tr>
             <tr
@@ -2259,7 +2205,19 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 9
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%209"
+                  >
+                    plugin a 9
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -2269,34 +2227,12 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-9
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 9"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 9"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -2305,7 +2241,19 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 10
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%2010"
+                  >
+                    plugin a 10
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -2315,35 +2263,12 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-10
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 10"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 10"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Enabled
               </td>
             </tr>
             <tr
@@ -2352,7 +2277,19 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 11
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%2011"
+                  >
+                    plugin a 11
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -2362,34 +2299,12 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-11
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 11"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 11"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -2398,7 +2313,19 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 12
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%2012"
+                  >
+                    plugin a 12
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -2408,35 +2335,12 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-12
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 12"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 12"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Enabled
               </td>
             </tr>
             <tr
@@ -2445,7 +2349,19 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 13
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%2013"
+                  >
+                    plugin a 13
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -2455,34 +2371,12 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-13
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 13"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 13"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Incompatible
               </td>
             </tr>
             <tr
@@ -2491,7 +2385,19 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                plugin a 14
+                <h6
+                  class="MuiTypography-root MuiTypography-subtitle1 css-1t3dwd5-MuiTypography-root"
+                >
+                  <a
+                    class="MuiTypography-root MuiTypography-inherit MuiTypography-alignRight MuiLink-root MuiLink-underlineHover css-1g9r2nj-MuiTypography-root-MuiLink-root"
+                    href="/settings/plugins/plugin%20a%2014"
+                  >
+                    plugin a 14
+                  </a>
+                </h6>
+                <span
+                  class="MuiTypography-root MuiTypography-caption css-1yjsbnr-MuiTypography-root"
+                />
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
@@ -2501,35 +2407,12 @@ exports[`Storyshots Settings/PluginSettings More Items 1`] = `
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                https://example.com/plugin-link-14
+                Unknown
               </td>
               <td
                 class="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeSmall css-1k1onho-MuiTableCell-root"
               >
-                <span
-                  class="MuiSwitch-root MuiSwitch-sizeMedium css-julti5-MuiSwitch-root"
-                >
-                  <span
-                    aria-label="Toggle plugin a 14"
-                    class="MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked PrivateSwitchBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary Mui-checked Mui-checked css-5xfy0x-MuiButtonBase-root-MuiSwitch-switchBase"
-                  >
-                    <input
-                      checked=""
-                      class="PrivateSwitchBase-input MuiSwitch-input css-1m9pwf3"
-                      name="plugin a 14"
-                      type="checkbox"
-                    />
-                    <span
-                      class="MuiSwitch-thumb css-jsexje-MuiSwitch-thumb"
-                    />
-                    <span
-                      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-                    />
-                  </span>
-                  <span
-                    class="MuiSwitch-track css-1yjjitx-MuiSwitch-track"
-                  />
-                </span>
+                Enabled
               </td>
             </tr>
           </tbody>

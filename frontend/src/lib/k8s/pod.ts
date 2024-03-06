@@ -58,6 +58,8 @@ export interface LogOptions {
   showTimestamps?: boolean;
   /** Whether to follow the log stream */
   follow?: boolean;
+  /** Callback to be called when the reconnection attempts stop */
+  onReconnectStop?: () => void;
 }
 
 /**@deprecated
@@ -113,15 +115,24 @@ class Pod extends makeKubeObject<KubePod>('Pod') {
       });
     }
 
+    let isReconnecting = true; // Flag to track reconnection attempts
     const [container, onLogs, logsOptions] = args as Parameters<newGetLogs>;
     const {
       tailLines = 100,
       showPrevious = false,
       showTimestamps = false,
       follow = true,
+      onReconnectStop,
     } = logsOptions;
+
     let logs: string[] = [];
-    const url = `/api/v1/namespaces/${this.getNamespace()}/pods/${this.getName()}/log?container=${container}&previous=${showPrevious}&tailLines=${tailLines}&timestamps=${showTimestamps}&follow=${follow}`;
+    let url = `/api/v1/namespaces/${this.getNamespace()}/pods/${this.getName()}/log?container=${container}&previous=${showPrevious}&timestamps=${showTimestamps}&follow=${follow}`;
+
+    // Negative tailLines parameter fetches all logs. If it's non negative it fetches
+    // the tailLines number of logs.
+    if (tailLines !== -1) {
+      url += `&tailLines=${tailLines}`;
+    }
 
     function onResults(item: string) {
       if (!item) {
@@ -137,7 +148,22 @@ class Pod extends makeKubeObject<KubePod>('Pod') {
       connectCb: () => {
         logs = [];
       },
-      reconnectOnFailure: follow,
+      /**
+       * This callback is called when the connection is closed. It then check
+       * if the connection was closed due to an error or not. If it was closed
+       * due to an error, it stops further reconnection attempts.
+       */
+      failCb: () => {
+        // If it's a reconnection attempt, stop further reconnection attempts
+        if (follow && isReconnecting) {
+          isReconnecting = false;
+
+          // If the onReconnectStop callback is provided, call it
+          if (onReconnectStop) {
+            onReconnectStop();
+          }
+        }
+      },
     });
 
     return cancel;

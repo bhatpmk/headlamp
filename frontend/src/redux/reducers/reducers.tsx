@@ -7,10 +7,12 @@ import actionButtons from '../actionButtonsSlice';
 import clusterAction from '../clusterActionSlice';
 import configReducer from '../configSlice';
 import filterReducer from '../filterSlice';
+import eventCallbackReducer from '../headlampEventSlice';
 import routesReducer from '../routesSlice';
 import resourceTableReducer from './../../components/common/Resource/resourceTableSlice';
 import detailsViewSectionReducer from './../../components/DetailsViewSection/detailsViewSectionSlice';
 import sidebarReducer from './../../components/Sidebar/sidebarSlice';
+import pluginConfigReducer from './../../plugin/pluginConfigSlice';
 import uiReducer from './ui';
 
 const reducers = combineReducers({
@@ -26,6 +28,9 @@ const reducers = combineReducers({
   detailsViewSection: detailsViewSectionReducer,
   routes: routesReducer,
   sidebar: sidebarReducer,
+  detailsViewSections: detailsViewSectionReducer,
+  eventCallbackReducer,
+  pluginConfigs: pluginConfigReducer,
 });
 
 export type RootState = ReturnType<typeof reducers>;

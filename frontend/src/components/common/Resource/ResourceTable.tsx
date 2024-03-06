@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import helpers from '../../../helpers';
 import { KubeObject } from '../../../lib/k8s/cluster';
 import { useFilterFunc } from '../../../lib/util';
+import { HeadlampEventType, useEventCallback } from '../../../redux/headlampEventSlice';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
 import { useSettings } from '../../App/Settings/hook';
 import { DateLabel } from '../Label';
@@ -29,6 +30,8 @@ type ColumnType = 'age' | 'name' | 'namespace' | 'type' | 'kind';
 export interface ResourceTableProps extends Omit<SimpleTableProps, 'columns'> {
   /** The columns to be rendered, like used in SimpleTable, or by name. */
   columns: (ResourceTableColumn | ColumnType)[];
+  /** Allow to prefilter columns */
+  hideColumns?: string[] | null;
   /** ID for the table. Will be used by plugins to identify this table.
    * Official tables in Headlamp will have the 'headlamp-' prefix for their IDs which is followed by the resource's plural name or the section in Headlamp the table is in.
    * Plugins should use their own prefix when creating tables, to avoid any clashes.
@@ -101,6 +104,15 @@ function TableFromResourceClass(props: ResourceTableFromResourceClassProps) {
   const [items, error] = resourceClass.useList();
   // throttle the update of the table to once per second
   const throttledItems = useThrottle(items, 1000);
+  const dispatchHeadlampEvent = useEventCallback(HeadlampEventType.LIST_VIEW);
+
+  useEffect(() => {
+    dispatchHeadlampEvent({
+      resources: items,
+      resourceKind: resourceClass.className,
+      error: error || undefined,
+    });
+  }, [items, error]);
 
   return (
     <Table
@@ -121,6 +133,7 @@ function Table(props: ResourceTableProps) {
     id,
     noProcessing = false,
     columnChooserAnchor = null,
+    hideColumns = [],
     onColumnChooserClose,
     ...otherProps
   } = props;
@@ -145,8 +158,10 @@ function Table(props: ResourceTableProps) {
       });
     }
 
+    let shouldSortOnAge = false;
+
     const resourceCols: ResourceTableColumnWithDefaultShow[] = processedColumns
-      .map((col, index) => {
+      .map(col => {
         if (typeof col !== 'string') {
           return col;
         }
@@ -168,9 +183,7 @@ function Table(props: ResourceTableProps) {
               },
             };
           case 'age':
-            if (sortingColumn === undefined) {
-              sortingColumn = index + 1;
-            }
+            shouldSortOnAge = defaultSortingColumn === undefined;
             return {
               id: 'age',
               label: t('translation|Age'),
@@ -223,6 +236,7 @@ function Table(props: ResourceTableProps) {
             throw new Error(`Unknown column: ${col}`);
         }
       })
+      .filter(col => !hideColumns?.includes(col.id ?? ''))
       .map((col, idx) => {
         const newCol: ResourceTableColumnWithDefaultShow = { id: col.id || idx.toString(), ...col };
         // Assign the default show value so we can remember it later.
@@ -236,8 +250,22 @@ function Table(props: ResourceTableProps) {
 
     // Filter out columns that have show set to false.
     const cols = resourceCols.filter(col => col.show !== false);
+
+    if (shouldSortOnAge) {
+      // Sorting column on SimpleTable starts at 1.
+      sortingColumn = cols.findIndex(col => col.id === 'age') + 1;
+    }
+
     return [resourceCols, cols, sortingColumn];
-  }, [columns, id, noProcessing, defaultSortingColumn, tableProcessors, tableSettings]);
+  }, [
+    columns,
+    hideColumns,
+    id,
+    noProcessing,
+    defaultSortingColumn,
+    tableProcessors,
+    tableSettings,
+  ]);
 
   function onColumnsVisibilityToggled(cols: ResourceTableColumn[]) {
     if (!!id) {

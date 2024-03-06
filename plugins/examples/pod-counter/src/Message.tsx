@@ -1,11 +1,5 @@
+import { ConfigStore } from '@kinvolk/headlamp-plugin/lib';
 import { Typography } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-
-const useStyle = makeStyles(() => ({
-  pods: {
-    fontStyle: 'italic',
-  },
-}));
 
 export interface MessageProps {
   /** String to display. */
@@ -24,10 +18,13 @@ export interface MessageProps {
  *
  */
 export default function Message({ msg, error }: MessageProps) {
-  const classes = useStyle();
+  const config = new ConfigStore<{ errorMessage?: string }>('@kinvolk/headlamp-pod-counter');
+  const useConf = config.useConfig();
+  const conf = useConf();
+
   return (
-    <Typography color="textPrimary" className={classes.pods}>
-      {!error ? `# Pods: ${msg}` : 'Uh, pods!?'}
+    <Typography color="textPrimary" sx={{ fontStyle: 'italic' }}>
+      {!error ? `# Pods: ${msg}` : conf?.errorMessage ? conf?.errorMessage : 'Uh, pods!?'}
     </Typography>
   );
 }

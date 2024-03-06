@@ -10,8 +10,6 @@ const avoidCheck = [
   'ReleaseNotes',
   'ActionsNotifier',
   'AlertNotification',
-  'ConfirmButton',
-  'NamespacesAutocomplete',
   'ErrorBoundary',
 ];
 
@@ -20,6 +18,7 @@ const checkExports = [
   'BackLink',
   'Chart',
   'ConfirmDialog',
+  'ConfirmButton',
   'Dialog',
   'EmptyContent',
   'ErrorPage',
@@ -29,6 +28,7 @@ const checkExports = [
   'Link',
   'Loader',
   'LogViewer',
+  'NamespacesAutocomplete',
   'NameValueTable',
   'Resource',
   'SectionBox',

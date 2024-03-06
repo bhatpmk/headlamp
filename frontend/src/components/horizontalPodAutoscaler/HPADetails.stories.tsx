@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 import { KubeObjectClass } from '../../lib/k8s/cluster';
 import { KubeObject } from '../../lib/k8s/cluster';
 import Event from '../../lib/k8s/event';
@@ -9,6 +9,7 @@ import HPADetails from './Details';
 const usePhonyGet: KubeObjectClass['useGet'] = () => {
   return [
     new HPA({
+      apiVersion: 'autoscaling/v2',
       kind: 'HorizontalPodAutoscaler',
       metadata: {
         annotations: {

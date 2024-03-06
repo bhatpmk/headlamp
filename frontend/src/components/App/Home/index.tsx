@@ -14,6 +14,7 @@ import helpers from '../../../helpers';
 import { useClustersConf, useClustersVersion } from '../../../lib/k8s';
 import { ApiError, deleteCluster } from '../../../lib/k8s/apiProxy';
 import { Cluster } from '../../../lib/k8s/cluster';
+import Event from '../../../lib/k8s/event';
 import { createRouteURL } from '../../../lib/router';
 import { useFilterFunc, useId } from '../../../lib/util';
 import { setConfig } from '../../../redux/configSlice';
@@ -160,6 +161,22 @@ function HomeComponent(props: HomeComponentProps) {
   const { t } = useTranslation(['translation', 'glossary']);
   const [versions, errors] = useClustersVersion(Object.values(clusters));
   const filterFunc = useFilterFunc<Cluster>(['.name']);
+  const maxWarnings = 50;
+  const warningsMap = Event.useWarningList(Object.values(clusters).map(c => c.name));
+
+  function renderWarningsText(clusterName: string) {
+    const numWarnings =
+      (!!warningsMap[clusterName]?.error && -1) ||
+      (warningsMap[clusterName]?.warnings?.length ?? -1);
+
+    if (numWarnings === -1) {
+      return '⋯';
+    }
+    if (numWarnings >= maxWarnings) {
+      return `${maxWarnings}+`;
+    }
+    return numWarnings;
+  }
 
   return (
     <PageGrid>
@@ -191,6 +208,11 @@ function HomeComponent(props: HomeComponentProps) {
             {
               label: t('Status'),
               getter: ({ name }: Cluster) => <ClusterStatus error={errors[name]} />,
+            },
+            {
+              label: t('Warnings'),
+              getter: ({ name }: Cluster) => renderWarningsText(name),
+              sort: true,
             },
             {
               label: t('glossary|Kubernetes Version'),

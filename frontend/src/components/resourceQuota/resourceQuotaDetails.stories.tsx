@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 import { KubeObjectClass } from '../../lib/k8s/cluster';
 import ResourceQuota, { KubeResourceQuota } from '../../lib/k8s/resourceQuota';
 import { TestContext } from '../../test';
@@ -7,6 +7,7 @@ import ResourceQuotaDetails from './Details';
 const usePhonyGet: KubeObjectClass['useGet'] = () => {
   return [
     new ResourceQuota({
+      apiVersion: 'v1',
       kind: 'ResourceQuota',
       metadata: {
         annotations: {
@@ -58,6 +59,7 @@ export default {
 interface MockerStory {
   useGet?: KubeObjectClass['useGet'];
   useList?: KubeObjectClass['useList'];
+  allowEdit?: boolean;
 }
 
 const Template: Story = (args: MockerStory) => {
@@ -67,6 +69,13 @@ const Template: Story = (args: MockerStory) => {
   if (!!args.useList) {
     ResourceQuota.useList = args.useList;
   }
+  if (!!args.allowEdit) {
+    ResourceQuota.getAuthorization = (): Promise<{ status: any }> => {
+      return new Promise(resolve => {
+        resolve({ status: { allowed: true, reason: '', code: 200 } });
+      });
+    };
+  }
 
   return <ResourceQuotaDetails />;
 };
@@ -74,6 +83,7 @@ const Template: Story = (args: MockerStory) => {
 export const Default = Template.bind({});
 Default.args = {
   useGet: usePhonyGet,
+  allowEdit: true,
 };
 
 export const NoItemYet = Template.bind({});

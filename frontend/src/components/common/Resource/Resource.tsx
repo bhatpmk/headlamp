@@ -7,7 +7,7 @@ import Grid, { GridProps, GridSize } from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import Input, { InputProps } from '@mui/material/Input';
 import Paper from '@mui/material/Paper';
-import { TextFieldProps } from '@mui/material/TextField';
+import { BaseTextFieldProps } from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { makeStyles, useTheme } from '@mui/styles';
 import { Location } from 'history';
@@ -29,6 +29,7 @@ import {
 import Pod, { KubePod, KubeVolume } from '../../../lib/k8s/pod';
 import { createRouteURL, RouteURLProps } from '../../../lib/router';
 import { getThemeName } from '../../../lib/themes';
+import { HeadlampEventType, useEventCallback } from '../../../redux/headlampEventSlice';
 import { useTypedSelector } from '../../../redux/reducers/reducers';
 import { useHasPreviousRoute } from '../../App/RouteSwitcher';
 import { SectionBox } from '../../common/SectionBox';
@@ -126,6 +127,8 @@ export function DetailsGrid(props: DetailsGridProps) {
   const detailViewsProcessors = useTypedSelector(
     state => state.detailsViewSection.detailsViewSectionsProcessors
   );
+  const dispatchHeadlampEvent = useEventCallback();
+
   // This component used to have a MainInfoSection with all these props passed to it, so we're
   // using them to accomplish the same behavior.
   const { extraInfo, actions, noDefaultActions, headerStyle, backLink, title, headerSection } =
@@ -133,6 +136,19 @@ export function DetailsGrid(props: DetailsGridProps) {
 
   const [item, error] = resourceType.useGet(name, namespace);
   const prevItemRef = React.useRef<{ uid?: string; version?: string; error?: ApiError }>({});
+
+  React.useEffect(() => {
+    if (item) {
+      dispatchHeadlampEvent({
+        type: HeadlampEventType.DETAILS_VIEW,
+        data: {
+          title: item?.jsonData.kind,
+          resource: item,
+          error: error || undefined,
+        },
+      });
+    }
+  }, [item]);
 
   React.useEffect(() => {
     // We cannot call this callback more than once on each version of the item, in order to avoid
@@ -374,8 +390,12 @@ export function SectionGrid(props: SectionGridProps) {
   );
 }
 
-export function DataField(props: TextFieldProps) {
-  const { label, value } = props;
+export interface DataFieldProps extends BaseTextFieldProps {
+  disableLabel?: boolean;
+}
+
+export function DataField(props: DataFieldProps) {
+  const { disableLabel, label, value } = props;
   // Make sure we reload after a theme change
   useTheme();
   const themeName = getThemeName();
@@ -385,8 +405,11 @@ export function DataField(props: TextFieldProps) {
     if (!editorElement) {
       return;
     }
+
     const lineCount = editor.getModel()?.getLineCount() || 1;
-    if (lineCount <= 10) {
+    if (lineCount < 2) {
+      editorElement.style.height = '3vh';
+    } else if (lineCount <= 10) {
       editorElement.style.height = '10vh';
     } else {
       editorElement.style.height = '40vh';
@@ -396,6 +419,19 @@ export function DataField(props: TextFieldProps) {
   let language = (label as string).split('.').pop() as string;
   if (language !== 'json') {
     language = 'yaml';
+  }
+  if (disableLabel === true) {
+    return (
+      <Box borderTop={0} border={1}>
+        <Editor
+          value={value as string}
+          language={language}
+          onMount={handleEditorDidMount}
+          options={{ readOnly: true, lineNumbers: 'off' }}
+          theme={themeName === 'dark' ? 'vs-dark' : 'light'}
+        />
+      </Box>
+    );
   }
   return (
     <>
@@ -793,10 +829,11 @@ export function ContainerInfo(props: ContainerInfoProps) {
 export interface OwnedPodsSectionProps {
   resource: KubeObjectInterface;
   hideColumns?: PodListProps['hideColumns'];
+  noSearch?: boolean;
 }
 
 export function OwnedPodsSection(props: OwnedPodsSectionProps) {
-  const { resource, hideColumns } = props;
+  const { resource, hideColumns, noSearch } = props;
   let namespace;
 
   if (resource.kind === 'Namespace') {
@@ -819,6 +856,7 @@ export function OwnedPodsSection(props: OwnedPodsSectionProps) {
       pods={pods}
       error={error}
       noNamespaceFilter={onlyOneNamespace}
+      noSearch={noSearch}
     />
   );
 }

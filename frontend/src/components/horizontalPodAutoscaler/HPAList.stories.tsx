@@ -1,12 +1,19 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
+import { Meta, Story } from '@storybook/react';
 import HPA, { KubeHPA } from '../../lib/k8s/hpa';
 import { TestContext } from '../../test';
 import { generateK8sResourceList } from '../../test/mocker';
 import HpaList from './List';
 
+HPA.getAuthorization = (): Promise<{ status: any }> => {
+  return new Promise(resolve => {
+    resolve({ status: { allowed: true, reason: '', code: 200 } });
+  });
+};
+
 HPA.useList = () => {
   const objList = generateK8sResourceList<KubeHPA>(
     {
+      apiVersion: 'autoscaling/v2',
       kind: 'HorizontalPodAutoscaler',
       metadata: {
         annotations: {
