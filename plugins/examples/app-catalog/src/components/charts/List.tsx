@@ -48,7 +48,11 @@ export function ChartsList({ fetchCharts = fetchChartsFromArtifact }) {
   useEffect(() => {
     setCharts(null);
     fetchCharts(search, chartCategory, page).then(response => {
-      setCharts(response.packages);
+      setCharts(response.entries);
+      // Get array here
+      // setCharts(Object.keys(response.entries))
+      // setCharts(Object.entries(response.entries))
+      // console.log(response.entries);
       const facets = response.facets;
       const categoryOptions = facets.find(
         (facet: {
@@ -164,102 +168,122 @@ export function ChartsList({ fetchCharts = fetchChartsFromArtifact }) {
             </Typography>
           </Box>
         ) : (
-          charts.map(chart => {
-            return (
-              <Box maxWidth="30%" width="400px" m={1}>
-                <Card>
-                  <Box height="60px" display="flex" alignItems="center" marginTop="15px">
-                    <CardMedia
-                      image={`https://artifacthub.io/image/${chart.logo_image_id}`}
+          // need the first element of chart
+          //charts.map(chart =>  {
+          //  return (
+          //      <Box mt={2} mx={2}>
+          //         <Typography variant="h5" component="h2">
+          //          {`${chart}`}
+          //        </Typography>
+          //       </Box>
+          //   );
+
+          /*Object.keys(charts).map( chart =>  {
+                  return (
+                    <Box mt={2} mx={2}>
+                        <Typography variant="h5" component="h2">
+                          {`${charts[chart][0].description}`}
+                        </Typography>
+                    </Box>
+                );*/
+
+          Object.keys(charts).map(chartName => {
+            return charts[chartName].map(chart => {
+              return (
+                // TODO: There is some alignment problem where last row has an empty middle box
+                <Box maxWidth="30%" width="400px" m={1}>
+                  <Card>
+                    <Box height="60px" display="flex" alignItems="center" marginTop="15px">
+                      {/* TODO: cert-manager-webhook-oci has no icon */}
+                      <CardMedia
+                        image={`${chart?.icon || ''}`}
+                        style={{
+                          width: '60px',
+                          margin: '1rem',
+                        }}
+                        component="img"
+                      />
+                    </Box>
+                    <CardContent
                       style={{
-                        width: '60px',
-                        margin: '1rem',
-                      }}
-                      component="img"
-                    />
-                  </Box>
-                  <CardContent
-                    style={{
-                      margin: '1rem 0rem',
-                      height: '25vh',
-                      overflow: 'hidden',
-                      paddingTop: 0,
-                    }}
-                  >
-                    <Box
-                      style={{
+                        margin: '1rem 0rem',
+                        height: '25vh',
                         overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        whiteSpace: 'nowrap',
+                        paddingTop: 0,
                       }}
                     >
-                      <Tooltip title={chart.name}>
-                        <Typography component="h5" variant="h5">
-                          <RouterLink
-                            routeName="/helm/:repoName/charts/:chartName"
-                            params={{
-                              chartName: chart.name,
-                              repoName: chart.repository.name,
-                            }}
-                          >
-                            {chart.name}
-                          </RouterLink>
-                        </Typography>
-                      </Tooltip>
-                    </Box>
-                    <Box display="flex" justifyContent="space-between" my={1}>
-                      <Typography>v{chart.version}</Typography>
                       <Box
-                        marginLeft={1}
                         style={{
                           overflow: 'hidden',
                           textOverflow: 'ellipsis',
                           whiteSpace: 'nowrap',
                         }}
                       >
-                        <Tooltip title={chart?.repository?.name || ''}>
-                          <span>{chart?.repository?.name || ''}</span>
+                        <Tooltip title={chart.name}>
+                          <Typography component="h5" variant="h5">
+                            {/* TODO: Fix this */}
+
+                            {chart.name}
+                          </Typography>
                         </Tooltip>
                       </Box>
-                    </Box>
-                    <Divider />
-                    <Box mt={1}>
-                      <Typography>
-                        {chart?.description?.slice(0, 100)}
-                        {chart?.description?.length > 100 && (
-                          <Tooltip title={chart?.description}>
-                            <span>…</span>
+                      <Box display="flex" justifyContent="space-between" my={1}>
+                        {/* TODO: Cert-manager version contains prefix v */}
+                        <Typography>v{chart.version}</Typography>
+                        <Box
+                          marginLeft={1}
+                          style={{
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            whiteSpace: 'nowrap',
+                          }}
+                        >
+                          {/* TODO: Fix this */}
+                          <Tooltip title={chart?.repository?.name || ''}>
+                            <span>{chart?.repository?.name || ''}</span>
                           </Tooltip>
-                        )}
-                      </Typography>
-                    </Box>
-                  </CardContent>
-                  <CardActions
-                    style={{
-                      justifyContent: 'space-between',
-                      padding: '14px',
-                    }}
-                  >
-                    <Button
+                        </Box>
+                      </Box>
+                      <Divider />
+                      <Box mt={1}>
+                        <Typography>
+                          {chart?.description?.slice(0, 100)}
+                          {chart?.description?.length > 100 && (
+                            <Tooltip title={chart?.description}>
+                              <span>…</span>
+                            </Tooltip>
+                          )}
+                        </Typography>
+                      </Box>
+                    </CardContent>
+                    <CardActions
                       style={{
-                        backgroundColor: '#000',
-                        color: 'white',
-                        textTransform: 'none',
-                      }}
-                      onClick={() => {
-                        setSelectedChartForInstall(chart);
-                        setEditorOpen(true);
+                        justifyContent: 'space-between',
+                        padding: '14px',
                       }}
                     >
-                      Install
-                    </Button>
-                    <Link href={chart?.repository?.url} target="_blank">
-                      Learn More
-                    </Link>
-                  </CardActions>
-                </Card>
-              </Box>
-            );
+                      <Button
+                        style={{
+                          backgroundColor: '#000',
+                          color: 'white',
+                          textTransform: 'none',
+                        }}
+                        onClick={() => {
+                          setSelectedChartForInstall(chart);
+                          setEditorOpen(true);
+                        }}
+                      >
+                        Install
+                      </Button>
+                      {/* TODO: When there are multiple sources, the link includes comma separated values */}
+                      <Link href={chart?.sources} target="_blank">
+                        Learn More
+                      </Link>
+                    </CardActions>
+                  </Card>
+                </Box>
+              );
+            });
           })
         )}
       </Box>
@@ -278,8 +302,8 @@ export function ChartsList({ fetchCharts = fetchChartsFromArtifact }) {
         </Box>
       )}
       <Box textAlign="right">
-        <Link href="https://artifacthub.io/" target="_blank">
-          Powered by ArtifactHub AAA
+        <Link href="https://docs.oracle.com/en/operating-systems/olcne/" target="_blank">
+          Powered by OCNE :)
         </Link>
       </Box>
     </>

@@ -21,12 +21,17 @@ export default function ChartDetails() {
   const [chart, setChart] = useState<{
     name: string;
     description: string;
-    logo_image_id: string;
+    // logo_image_id: string;
+    icon: string;
+
+    // TODO: What is this ?
     readme: string;
-    app_version: string;
+    // app_version: string;
+    appVersion: string;
     maintainers: Array<{ name: string; email: string }>;
-    home_url: string;
-    package_id: string;
+    // home_url: string;
+    home: string;
+    // package_id: string;
     version: string;
   } | null>(null);
   const [openEditor, setOpenEditor] = useState(false);
@@ -78,12 +83,7 @@ export default function ChartDetails() {
                 value: (
                   <Box display="flex" alignItems="center">
                     <Box mr={1}>
-                      <img
-                        src={`https://artifacthub.io/image/${chart.logo_image_id}`}
-                        width="25"
-                        height="25"
-                        alt={chart.name}
-                      />
+                      <img src={`${chart?.icon || ''}`} width="25" height="25" alt={chart.name} />
                     </Box>
                     <Box>{chart.name}</Box>
                   </Box>
@@ -99,7 +99,7 @@ export default function ChartDetails() {
               },
               {
                 name: 'App Version',
-                value: chart.app_version,
+                value: chart.appVersion,
               },
               {
                 name: 'Repository',
@@ -117,8 +117,8 @@ export default function ChartDetails() {
               {
                 name: 'URL',
                 value: (
-                  <Link href={chart.home_url} target="_blank">
-                    {chart.home_url}
+                  <Link href={chart.home} target="_blank">
+                    {chart.home}
                   </Link>
                 ),
               },

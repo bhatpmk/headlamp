@@ -6,20 +6,24 @@ export function fetchChartsFromArtifact(
   page: number,
   limit: number = PAGE_OFFSET_COUNT_FOR_CHARTS
 ) {
+  // PABHAT: Just return the json output by accessing /charts/
   if (!category || category.value === 0) {
     return fetch(
-      `https://artifacthub.io/api/v1/packages/search?kind=0&ts_query_web=${search}&sort=relevance&facets=true&limit=${limit}&offset=${
-        (page - 1) * limit
-      }`
+      //`https://artifacthub.io/api/v1/packages/search?kind=0&ts_query_web=${search}&sort=relevance&facets=true&limit=${limit}&offset=${
+      //  (page - 1) * limit
+      //}`
+      `http://0.0.0.0:80/charts/`
     ).then(response => response.json());
   }
   return fetch(
-    `https://artifacthub.io/api/v1/packages/search?kind=0&ts_query_web=${search}&category=${
-      category.value
-    }&sort=relevance&facets=true&limit=${limit}&offset=${(page - 1) * limit}`
+    //`https://artifacthub.io/api/v1/packages/search?kind=0&ts_query_web=${search}&category=${
+    //  category.value
+    //}&sort=relevance&facets=true&limit=${limit}&offset=${(page - 1) * limit}`
+    `http://0.0.0.0:80/charts/`
   ).then(response => response.json());
 }
 
+// PABHAT: Handle this later
 export function fetchChartDetailFromArtifact(chartName: string, repoName: string) {
   return fetch(`http://localhost:4466/externalproxy`, {
     headers: {
