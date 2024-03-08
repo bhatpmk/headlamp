@@ -46,13 +46,13 @@ export function EditorDialog(props: {
   }, [openEditor]);
 
   function handleChartValueFetch(chart: any) {
-    //const packageID = chart.package_id;
-    //const packageVersion = chart.version;
-    // setChartValuesLoading(true);
-    // fetchChartValues(packageID, packageVersion)
-    fetchChartValues()
+    // const packageID = chart.package_id;
+    const packageID = chart.name;
+    const packageVersion = chart.version;
+    setChartValuesLoading(true);
+    fetchChartValues(packageID, packageVersion)
       .then((response: any) => {
-        // setChartValuesLoading(false);
+        setChartValuesLoading(false);
         setChartValues(response);
         setDefaultChartValues(yamlToJSON(response));
       })
@@ -67,6 +67,7 @@ export function EditorDialog(props: {
 
   useEffect(() => {
     // TODO: Fix this
+    // fetchChartDetailFromArtifact(chart.name, chart.repository.name).then(response => {
     fetchChartDetailFromArtifact(chart.name, chart.name).then(response => {
       if (response.available_versions) {
         setVersions(
@@ -148,8 +149,8 @@ export function EditorDialog(props: {
           btoa(unescape(encodeURIComponent(jsonToYAML(chartValuesDIFF)))),
           //`${repoName}/${chart.name}`,
           // Use absolute URL of the chart, as supported here- https://helm.sh/docs/helm/helm_install/
-          // TODO: Fix this
-          `http://localhost:80/charts/grafana-6.11.0.tgz`,
+          // TODO: Will there be multiple chart bundle for a given component ?
+          `http://localhost:80/charts/${chart.urls[0]}`,
           selectedVersion.value,
           chartInstallDescription
         )
