@@ -14,26 +14,20 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import remarkGfm from 'remark-gfm';
 import { fetchChartDetailFromArtifact } from '../../api/charts';
 import { EditorDialog } from './EditorDialog';
-import {CHART_PROFILE} from "./List";
+import {CHART_PROFILE, VANILLA_HELM_REPO} from "./List";
 
 const { createRouteURL } = Router;
 export default function ChartDetails() {
-    if (CHART_PROFILE == 'VANILLA_HELM_REPOSITORY') {
+    if (CHART_PROFILE == VANILLA_HELM_REPO) {
         const { chartName, repoName } = useParams<{ chartName: string; repoName: string }>();
         const [chart, setChart] = useState<{
             name: string;
             description: string;
-            // logo_image_id: string;
             icon: string;
-
-            // TODO: What is this ?
             readme: string;
-            // app_version: string;
             appVersion: string;
             maintainers: Array<{ name: string; email: string }>;
-            // home_url: string;
             home: string;
-            // package_id: string;
             version: string;
         } | null>(null);
         const [openEditor, setOpenEditor] = useState(false);

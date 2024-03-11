@@ -22,15 +22,18 @@ import { useEffect, useState } from 'react';
 import { fetchChartsFromArtifact } from '../../api/charts';
 //import { createRelease } from '../../api/releases';
 import { EditorDialog } from './EditorDialog';
-import * as process from "process";
 
 export const PAGE_OFFSET_COUNT_FOR_CHARTS = 9;
 
 // TODO: Load this from environment and set default value as ARTIFACTHIB_IO
 export const CHART_PROFILE = 'VANILLA_HELM_REPOSITORY'
+export const VANILLA_HELM_REPO = 'VANILLA_HELM_REPOSITORY'
 
-// TODO: Again load this from environment, probably as part of the deployment of the chart
+// TODO: Load this from environment, probably as part of the deployment of the chart
 export const CHART_URL_PREFIX = 'http://localhost:80/';
+
+const CHART_PROVIDER_URL = 'https://docs.oracle.com/en/operating-systems/olcne/'
+const CHART_PROVIDER_INFO = 'Powered by Oracle Cloud Native Environment'
 
 export function ChartsList({ fetchCharts = fetchChartsFromArtifact }) {
   const helmChartCategoryList = [
@@ -55,7 +58,7 @@ export function ChartsList({ fetchCharts = fetchChartsFromArtifact }) {
   useEffect(() => {
     setCharts(null);
     fetchCharts(search, chartCategory, page).then(response => {
-      if (CHART_PROFILE === 'VANILLA_HELM_REPOSITORY')  {
+      if (CHART_PROFILE === VANILLA_HELM_REPO)  {
           setCharts(response.entries);
       } else {
           setCharts(response.packages);
@@ -149,7 +152,7 @@ export function ChartsList({ fetchCharts = fetchChartsFromArtifact }) {
     );
   }
 
-  if (CHART_PROFILE == 'VANILLA_HELM_REPOSITORY') {
+  if (CHART_PROFILE == VANILLA_HELM_REPO) {
       return (
           <>
               <EditorDialog
@@ -290,9 +293,10 @@ export function ChartsList({ fetchCharts = fetchChartsFromArtifact }) {
                       />
                   </Box>
               )}
+              {/* TODO: Display this only when the constants are set to a non-null value */}
               <Box textAlign="right">
-                  <Link href="https://docs.oracle.com/en/operating-systems/olcne/" target="_blank">
-                      Powered by Oracle Cloud Native Environment
+                  <Link href={CHART_PROVIDER_URL} target="_blank">
+                      {CHART_PROVIDER_INFO}
                   </Link>
               </Box>
           </>

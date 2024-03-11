@@ -1,4 +1,9 @@
-import {CHART_PROFILE, CHART_URL_PREFIX, PAGE_OFFSET_COUNT_FOR_CHARTS} from '../components/charts/List';
+import {
+  CHART_PROFILE,
+  CHART_URL_PREFIX,
+  PAGE_OFFSET_COUNT_FOR_CHARTS,
+  VANILLA_HELM_REPO
+} from '../components/charts/List';
 
 export function fetchChartsFromArtifact(
   search: string = '',
@@ -6,7 +11,7 @@ export function fetchChartsFromArtifact(
   page: number,
   limit: number = PAGE_OFFSET_COUNT_FOR_CHARTS
 ) {
-  if ( CHART_PROFILE === 'VANILLA_HELM_REPOSITORY') {
+  if ( CHART_PROFILE === VANILLA_HELM_REPO) {
     return fetch(
         `${CHART_URL_PREFIX}/charts/`
     ).then(response => response.json());
@@ -26,7 +31,7 @@ export function fetchChartsFromArtifact(
 }
 
 export function fetchChartDetailFromArtifact(chartName: string, repoName: string) {
-  if ( CHART_PROFILE === 'VANILLA_HELM_REPOSITORY') {
+  if ( CHART_PROFILE === VANILLA_HELM_REPO) {
     return fetch(
         `${CHART_URL_PREFIX}/versions/${chartName}.json`
     ).then(response => response.json());
@@ -40,7 +45,7 @@ export function fetchChartDetailFromArtifact(chartName: string, repoName: string
 }
 
 export function fetchChartValues(packageID: string, packageVersion: string) {
-  if ( CHART_PROFILE === 'VANILLA_HELM_REPOSITORY') {
+  if ( CHART_PROFILE === VANILLA_HELM_REPO) {
     return fetch(
         `${CHART_URL_PREFIX}/values/${packageID}/${packageVersion}/`
     ).then(response => response.text());
