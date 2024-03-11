@@ -10,6 +10,8 @@ import { fetchChartDetailFromArtifact, fetchChartValues } from '../../api/charts
 import { createRelease, getActionStatus } from '../../api/releases';
 import { addRepository } from '../../api/repository';
 import { jsonToYAML, yamlToJSON } from '../../helpers';
+import {CHART_PROFILE} from "./List";
+import {CHART_URL_PREFIX} from "./List";
 
 export function EditorDialog(props: {
   openEditor: boolean;
@@ -46,8 +48,7 @@ export function EditorDialog(props: {
   }, [openEditor]);
 
   function handleChartValueFetch(chart: any) {
-    // const packageID = chart.package_id;
-    const packageID = chart.name;
+    const packageID = (CHART_PROFILE === 'VANILLA_HELM_REPOSITORY') ? chart.name : chart.package_id
     const packageVersion = chart.version;
     setChartValuesLoading(true);
     fetchChartValues(packageID, packageVersion)
@@ -66,16 +67,13 @@ export function EditorDialog(props: {
   }
 
   useEffect(() => {
-    // TODO: Fix this
-    // fetchChartDetailFromArtifact(chart.name, chart.repository.name).then(response => {
-    fetchChartDetailFromArtifact(chart.name, chart.name).then(response => {
+    fetchChartDetailFromArtifact(chart.name, (CHART_PROFILE === 'VANILLA_HELM_REPOSITORY') ? chart.name : chart.repository.name).then(response => {
       if (response.available_versions) {
         setVersions(
           response.available_versions.map(({ version }) => ({ title: version, value: version }))
         );
       }
     });
-
     handleChartValueFetch(chart);
   }, [chart]);
 
@@ -130,30 +128,24 @@ export function EditorDialog(props: {
       });
       return;
     }
-    // const repoName = chart.repository.name;
-    const repoName = chart.name;
-    // const repoURL = chart.repository.url;
-    const repoURL = `https://grafana.github.io/helm-charts`;
+
     const jsonChartValues = yamlToJSON(chartValues);
     const chartValuesDIFF = _.omitBy(jsonChartValues, (value, key) =>
       _.isEqual(defaultChartValues[key], value)
     );
     setInstallLoading(true);
 
-    // TODO: Rather than adding a helm repo, use the URL to access the .tgz file
-    addRepository(repoName, repoURL)
-      .then(() => {
-        createRelease(
+    // Assumption: In case of profile: VANILLA_HELM_REPOSITORY, the absolute URL of the chart bundle
+    // is defined in urls. So adding repository to the helm client is skipped
+    if (CHART_PROFILE === 'VANILLA_HELM_REPOSITORY') {
+      createRelease(
           releaseName,
           selectedNamespace.value,
           btoa(unescape(encodeURIComponent(jsonToYAML(chartValuesDIFF)))),
-          //`${repoName}/${chart.name}`,
-          // Use absolute URL of the chart, as supported here- https://helm.sh/docs/helm/helm_install/
-          // TODO: Will there be multiple chart bundle for a given component ?
-          `http://localhost:80/charts/${chart.urls[0]}`,
+          `${CHART_URL_PREFIX}/charts/${chart.urls[0]}`,
           selectedVersion.value,
           chartInstallDescription
-        )
+      )
           .then(() => {
             enqueueSnackbar(`Installation request for ${releaseName} accepted`, {
               variant: 'info',
@@ -167,13 +159,40 @@ export function EditorDialog(props: {
               variant: 'error',
             });
           });
-      })
-      .catch(error => {
-        handleEditor(false);
-        enqueueSnackbar(`Error adding repository ${error}`, {
-          variant: 'error',
-        });
-      });
+    } else {
+      const repoURL = chart.repository.url;
+      const repoName = chart.repository.name;
+      addRepository(repoName, repoURL)
+          .then(() => {
+            createRelease(
+                releaseName,
+                selectedNamespace.value,
+                btoa(unescape(encodeURIComponent(jsonToYAML(chartValuesDIFF)))),
+                `${repoName}/${chart.name}`,
+                selectedVersion.value,
+                chartInstallDescription
+            )
+                .then(() => {
+                  enqueueSnackbar(`Installation request for ${releaseName} accepted`, {
+                    variant: 'info',
+                  });
+                  handleEditor(false);
+                  checkInstallStatus(releaseName);
+                })
+                .catch(error => {
+                  handleEditor(false);
+                  enqueueSnackbar(`Error creating release request ${error}`, {
+                    variant: 'error',
+                  });
+                });
+          })
+          .catch(error => {
+            handleEditor(false);
+            enqueueSnackbar(`Error adding repository ${error}`, {
+              variant: 'error',
+            });
+          });
+    }
   }
 
   function validateFormField(fieldValue: { value: string; title: string } | null | string) {
