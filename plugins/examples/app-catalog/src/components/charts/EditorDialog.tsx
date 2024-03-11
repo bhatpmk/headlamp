@@ -10,7 +10,7 @@ import { fetchChartDetailFromArtifact, fetchChartValues } from '../../api/charts
 import { createRelease, getActionStatus } from '../../api/releases';
 import { addRepository } from '../../api/repository';
 import { jsonToYAML, yamlToJSON } from '../../helpers';
-import {CHART_PROFILE} from "./List";
+import {CHART_PROFILE, VANILLA_HELM_REPO} from "./List";
 import {CHART_URL_PREFIX} from "./List";
 
 export function EditorDialog(props: {
@@ -48,7 +48,7 @@ export function EditorDialog(props: {
   }, [openEditor]);
 
   function handleChartValueFetch(chart: any) {
-    const packageID = (CHART_PROFILE === 'VANILLA_HELM_REPOSITORY') ? chart.name : chart.package_id
+    const packageID = (CHART_PROFILE === VANILLA_HELM_REPO) ? chart.name : chart.package_id
     const packageVersion = chart.version;
     setChartValuesLoading(true);
     fetchChartValues(packageID, packageVersion)
@@ -67,7 +67,7 @@ export function EditorDialog(props: {
   }
 
   useEffect(() => {
-    fetchChartDetailFromArtifact(chart.name, (CHART_PROFILE === 'VANILLA_HELM_REPOSITORY') ? chart.name : chart.repository.name).then(response => {
+    fetchChartDetailFromArtifact(chart.name, (CHART_PROFILE === VANILLA_HELM_REPO) ? chart.name : chart.repository.name).then(response => {
       if (response.available_versions) {
         setVersions(
           response.available_versions.map(({ version }) => ({ title: version, value: version }))
