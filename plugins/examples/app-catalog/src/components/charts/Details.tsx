@@ -18,7 +18,7 @@ import {CHART_PROFILE, VANILLA_HELM_REPO} from "./List";
 
 const { createRouteURL } = Router;
 export default function ChartDetails() {
-    if (CHART_PROFILE == VANILLA_HELM_REPO) {
+    if (CHART_PROFILE === VANILLA_HELM_REPO) {
         const { chartName, repoName } = useParams<{ chartName: string; repoName: string }>();
         const [chart, setChart] = useState<{
             name: string;

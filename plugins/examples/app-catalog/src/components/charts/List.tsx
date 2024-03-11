@@ -152,7 +152,7 @@ export function ChartsList({ fetchCharts = fetchChartsFromArtifact }) {
     );
   }
 
-  if (CHART_PROFILE == VANILLA_HELM_REPO) {
+  if (CHART_PROFILE === VANILLA_HELM_REPO) {
       return (
           <>
               <EditorDialog

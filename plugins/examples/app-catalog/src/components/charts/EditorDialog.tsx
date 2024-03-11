@@ -137,7 +137,7 @@ export function EditorDialog(props: {
 
     // Assumption: In case of profile: VANILLA_HELM_REPOSITORY, the absolute URL of the chart bundle
     // is defined in urls. So adding repository to the helm client is skipped
-    if (CHART_PROFILE === 'VANILLA_HELM_REPOSITORY') {
+    if (CHART_PROFILE === VANILLA_HELM_REPO) {
       createRelease(
           releaseName,
           selectedNamespace.value,
