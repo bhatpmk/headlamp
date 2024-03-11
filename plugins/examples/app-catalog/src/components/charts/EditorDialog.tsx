@@ -10,8 +10,8 @@ import { fetchChartDetailFromArtifact, fetchChartValues } from '../../api/charts
 import { createRelease, getActionStatus } from '../../api/releases';
 import { addRepository } from '../../api/repository';
 import { jsonToYAML, yamlToJSON } from '../../helpers';
-import {CHART_PROFILE, VANILLA_HELM_REPO} from "./List";
-import {CHART_URL_PREFIX} from "./List";
+import { CHART_PROFILE, VANILLA_HELM_REPO } from './List';
+import { CHART_URL_PREFIX } from './List';
 
 export function EditorDialog(props: {
   openEditor: boolean;
@@ -48,7 +48,7 @@ export function EditorDialog(props: {
   }, [openEditor]);
 
   function handleChartValueFetch(chart: any) {
-    const packageID = (CHART_PROFILE === VANILLA_HELM_REPO) ? chart.name : chart.package_id
+    const packageID = CHART_PROFILE === VANILLA_HELM_REPO ? chart.name : chart.package_id;
     const packageVersion = chart.version;
     setChartValuesLoading(true);
     fetchChartValues(packageID, packageVersion)
@@ -67,7 +67,10 @@ export function EditorDialog(props: {
   }
 
   useEffect(() => {
-    fetchChartDetailFromArtifact(chart.name, (CHART_PROFILE === VANILLA_HELM_REPO) ? chart.name : chart.repository.name).then(response => {
+    fetchChartDetailFromArtifact(
+      chart.name,
+      CHART_PROFILE === VANILLA_HELM_REPO ? chart.name : chart.repository.name
+    ).then(response => {
       if (response.available_versions) {
         setVersions(
           response.available_versions.map(({ version }) => ({ title: version, value: version }))
@@ -139,59 +142,59 @@ export function EditorDialog(props: {
     // is defined in urls. So adding repository to the helm client is skipped
     if (CHART_PROFILE === VANILLA_HELM_REPO) {
       createRelease(
-          releaseName,
-          selectedNamespace.value,
-          btoa(unescape(encodeURIComponent(jsonToYAML(chartValuesDIFF)))),
-          `${CHART_URL_PREFIX}/charts/${chart.urls[0]}`,
-          selectedVersion.value,
-          chartInstallDescription
+        releaseName,
+        selectedNamespace.value,
+        btoa(unescape(encodeURIComponent(jsonToYAML(chartValuesDIFF)))),
+        `${CHART_URL_PREFIX}/charts/${chart.urls[0]}`,
+        selectedVersion.value,
+        chartInstallDescription
       )
-          .then(() => {
-            enqueueSnackbar(`Installation request for ${releaseName} accepted`, {
-              variant: 'info',
-            });
-            handleEditor(false);
-            checkInstallStatus(releaseName);
-          })
-          .catch(error => {
-            handleEditor(false);
-            enqueueSnackbar(`Error creating release request ${error}`, {
-              variant: 'error',
-            });
+        .then(() => {
+          enqueueSnackbar(`Installation request for ${releaseName} accepted`, {
+            variant: 'info',
           });
+          handleEditor(false);
+          checkInstallStatus(releaseName);
+        })
+        .catch(error => {
+          handleEditor(false);
+          enqueueSnackbar(`Error creating release request ${error}`, {
+            variant: 'error',
+          });
+        });
     } else {
       const repoURL = chart.repository.url;
       const repoName = chart.repository.name;
       addRepository(repoName, repoURL)
-          .then(() => {
-            createRelease(
-                releaseName,
-                selectedNamespace.value,
-                btoa(unescape(encodeURIComponent(jsonToYAML(chartValuesDIFF)))),
-                `${repoName}/${chart.name}`,
-                selectedVersion.value,
-                chartInstallDescription
-            )
-                .then(() => {
-                  enqueueSnackbar(`Installation request for ${releaseName} accepted`, {
-                    variant: 'info',
-                  });
-                  handleEditor(false);
-                  checkInstallStatus(releaseName);
-                })
-                .catch(error => {
-                  handleEditor(false);
-                  enqueueSnackbar(`Error creating release request ${error}`, {
-                    variant: 'error',
-                  });
-                });
-          })
-          .catch(error => {
-            handleEditor(false);
-            enqueueSnackbar(`Error adding repository ${error}`, {
-              variant: 'error',
+        .then(() => {
+          createRelease(
+            releaseName,
+            selectedNamespace.value,
+            btoa(unescape(encodeURIComponent(jsonToYAML(chartValuesDIFF)))),
+            `${repoName}/${chart.name}`,
+            selectedVersion.value,
+            chartInstallDescription
+          )
+            .then(() => {
+              enqueueSnackbar(`Installation request for ${releaseName} accepted`, {
+                variant: 'info',
+              });
+              handleEditor(false);
+              checkInstallStatus(releaseName);
+            })
+            .catch(error => {
+              handleEditor(false);
+              enqueueSnackbar(`Error creating release request ${error}`, {
+                variant: 'error',
+              });
             });
+        })
+        .catch(error => {
+          handleEditor(false);
+          enqueueSnackbar(`Error adding repository ${error}`, {
+            variant: 'error',
           });
+        });
     }
   }
 

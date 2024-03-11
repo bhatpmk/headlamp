@@ -14,377 +14,381 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import remarkGfm from 'remark-gfm';
 import { fetchChartDetailFromArtifact } from '../../api/charts';
 import { EditorDialog } from './EditorDialog';
-import {CHART_PROFILE, VANILLA_HELM_REPO} from "./List";
+import { CHART_PROFILE, VANILLA_HELM_REPO } from './List';
 
 const { createRouteURL } = Router;
 export default function ChartDetails() {
-    if (CHART_PROFILE === VANILLA_HELM_REPO) {
-        const { chartName, repoName } = useParams<{ chartName: string; repoName: string }>();
-        const [chart, setChart] = useState<{
-            name: string;
-            description: string;
-            icon: string;
-            readme: string;
-            appVersion: string;
-            maintainers: Array<{ name: string; email: string }>;
-            home: string;
-            version: string;
-        } | null>(null);
-        const [openEditor, setOpenEditor] = useState(false);
+  if (CHART_PROFILE === VANILLA_HELM_REPO) {
+    const { chartName, repoName } = useParams<{ chartName: string; repoName: string }>();
+    const [chart, setChart] = useState<{
+      name: string;
+      description: string;
+      icon: string;
+      readme: string;
+      appVersion: string;
+      maintainers: Array<{ name: string; email: string }>;
+      home: string;
+      version: string;
+    } | null>(null);
+    const [openEditor, setOpenEditor] = useState(false);
 
-        useEffect(() => {
-            fetchChartDetailFromArtifact(chartName, repoName).then(response => {
-                setChart(response);
-            });
-        }, [chartName, repoName]);
+    useEffect(() => {
+      fetchChartDetailFromArtifact(chartName, repoName).then(response => {
+        setChart(response);
+      });
+    }, [chartName, repoName]);
 
-        return (
-            <>
-                <EditorDialog
-                    openEditor={openEditor}
-                    chart={chart}
-                    handleEditor={open => {
-                        setOpenEditor(open);
-                    }}
-                />
-                <SectionBox
-                    title={
-                        <SectionHeader
-                            title={chartName}
-                            actions={[
-                                <Button
-                                    style={{
-                                        backgroundColor: '#000',
-                                        color: 'white',
-                                        textTransform: 'none',
-                                    }}
-                                    onClick={() => {
-                                        setOpenEditor(true);
-                                    }}
-                                >
-                                    Install
-                                </Button>,
-                            ]}
-                        />
-                    }
-                    backLink={createRouteURL('Charts')}
+    return (
+      <>
+        <EditorDialog
+          openEditor={openEditor}
+          chart={chart}
+          handleEditor={open => {
+            setOpenEditor(open);
+          }}
+        />
+        <SectionBox
+          title={
+            <SectionHeader
+              title={chartName}
+              actions={[
+                <Button
+                  style={{
+                    backgroundColor: '#000',
+                    color: 'white',
+                    textTransform: 'none',
+                  }}
+                  onClick={() => {
+                    setOpenEditor(true);
+                  }}
                 >
-                    {!chart ? (
-                        <Loader title="" />
-                    ) : (
-                        <NameValueTable
-                            rows={[
-                                {
-                                    name: 'Name',
-                                    value: (
-                                        <Box display="flex" alignItems="center">
-                                            <Box mr={1}>
-                                                <img src={`${chart?.icon || ''}`} width="25" height="25" alt={chart.name} />
-                                            </Box>
-                                            <Box>{chart.name}</Box>
-                                        </Box>
-                                    ),
-                                },
-                                {
-                                    name: 'Description',
-                                    value: (
-                                        <Box overflow="auto" width="80%">
-                                            {chart.description}
-                                        </Box>
-                                    ),
-                                },
-                                {
-                                    name: 'App Version',
-                                    value: chart.appVersion,
-                                },
-                                {
-                                    name: 'Repository',
-                                    value: repoName,
-                                },
-                                {
-                                    name: 'Maintainers',
-                                    value: chart?.maintainers?.map(maintainer => (
-                                        <Box display="flex" alignItems="center" mt={1}>
-                                            <Box mr={1}>{maintainer.name}</Box>
-                                            <Box>{maintainer.email}</Box>
-                                        </Box>
-                                    )),
-                                },
-                                {
-                                    name: 'URL',
-                                    value: (
-                                        <Link href={chart.home} target="_blank">
-                                            {chart.home}
-                                        </Link>
-                                    ),
-                                },
-                            ]}
-                        />
-                    )}
-                </SectionBox>
-                <SectionBox title="Readme">
-                    {!chart ? (
-                        <Loader title="" />
-                    ) : (
-                        <ReactMarkdown
-                            style={{
-                                padding: '1rem',
-                            }}
-                            remarkPlugins={[remarkGfm, rehypeFilter]}
-                            children={chart.readme}
-                            components={{
-                                a: props => {
-                                    return <Link {...props} target="_blank" />;
-                                },
-                                table: props => {
-                                    return (
-                                        <Table
-                                            {...props}
-                                            size="small"
-                                            style={{
-                                                tableLayout: 'fixed',
-                                            }}
-                                        />
-                                    );
-                                },
-                                thead: ({ node, ...props }) => {
-                                    console.log(node, props);
-                                    return <TableHead {...props} />;
-                                },
-                                tr: props => {
-                                    return <TableRow {...props} />;
-                                },
-                                td: props => {
-                                    return <TableCell {...props} style={{ textAlign: 'center', overflow: 'hidden' }} />;
-                                },
-                                // eslint-disable-next-line
-                                pre: ({ inline, className, children, ...props }) => {
-                                    return (
-                                        !inline && (
-                                            <pre {...props} className={className}>
-                      <Box display="block" width="64vw" my={0.5}>
-                        {children}
+                  Install
+                </Button>,
+              ]}
+            />
+          }
+          backLink={createRouteURL('Charts')}
+        >
+          {!chart ? (
+            <Loader title="" />
+          ) : (
+            <NameValueTable
+              rows={[
+                {
+                  name: 'Name',
+                  value: (
+                    <Box display="flex" alignItems="center">
+                      <Box mr={1}>
+                        <img src={`${chart?.icon || ''}`} width="25" height="25" alt={chart.name} />
                       </Box>
-                    </pre>
-                                        )
-                                    );
-                                },
-                                // eslint-disable-next-line
-                                code({ node, inline, className, children, ...props }) {
-                                    const match = /language-(\w+)/.exec(className || '');
-                                    return !inline && match ? (
-                                        <SyntaxHighlighter
-                                            children={String(children).replace(/\n$/, '')}
-                                            language={match[1]}
-                                            PreTag="div"
-                                            {...props}
-                                        />
-                                    ) : (
-                                        <code
-                                            className={className}
-                                            {...props}
-                                            style={{
-                                                overflow: 'auto',
-                                                width: '10vw',
-                                                display: 'block',
-                                            }}
-                                        >
-                                            {children}
-                                        </code>
-                                    );
-                                },
-                            }}
-                        />
-                    )}
-                </SectionBox>
-            </>
-        );
-    } else {
-        const {chartName, repoName} = useParams<{ chartName: string; repoName: string }>();
-        const [chart, setChart] = useState<{
-            name: string;
-            description: string;
-            logo_image_id: string;
-            readme: string;
-            app_version: string;
-            maintainers: Array<{ name: string; email: string }>;
-            home_url: string;
-            package_id: string;
-            version: string;
-        } | null>(null);
-        const [openEditor, setOpenEditor] = useState(false);
+                      <Box>{chart.name}</Box>
+                    </Box>
+                  ),
+                },
+                {
+                  name: 'Description',
+                  value: (
+                    <Box overflow="auto" width="80%">
+                      {chart.description}
+                    </Box>
+                  ),
+                },
+                {
+                  name: 'App Version',
+                  value: chart.appVersion,
+                },
+                {
+                  name: 'Repository',
+                  value: repoName,
+                },
+                {
+                  name: 'Maintainers',
+                  value: chart?.maintainers?.map(maintainer => (
+                    <Box display="flex" alignItems="center" mt={1}>
+                      <Box mr={1}>{maintainer.name}</Box>
+                      <Box>{maintainer.email}</Box>
+                    </Box>
+                  )),
+                },
+                {
+                  name: 'URL',
+                  value: (
+                    <Link href={chart.home} target="_blank">
+                      {chart.home}
+                    </Link>
+                  ),
+                },
+              ]}
+            />
+          )}
+        </SectionBox>
+        <SectionBox title="Readme">
+          {!chart ? (
+            <Loader title="" />
+          ) : (
+            <ReactMarkdown
+              style={{
+                padding: '1rem',
+              }}
+              remarkPlugins={[remarkGfm, rehypeFilter]}
+              children={chart.readme}
+              components={{
+                a: props => {
+                  return <Link {...props} target="_blank" />;
+                },
+                table: props => {
+                  return (
+                    <Table
+                      {...props}
+                      size="small"
+                      style={{
+                        tableLayout: 'fixed',
+                      }}
+                    />
+                  );
+                },
+                thead: ({ node, ...props }) => {
+                  console.log(node, props);
+                  return <TableHead {...props} />;
+                },
+                tr: props => {
+                  return <TableRow {...props} />;
+                },
+                td: props => {
+                  return (
+                    <TableCell {...props} style={{ textAlign: 'center', overflow: 'hidden' }} />
+                  );
+                },
+                // eslint-disable-next-line
+                pre: ({ inline, className, children, ...props }) => {
+                  return (
+                    !inline && (
+                      <pre {...props} className={className}>
+                        <Box display="block" width="64vw" my={0.5}>
+                          {children}
+                        </Box>
+                      </pre>
+                    )
+                  );
+                },
+                // eslint-disable-next-line
+                code({ node, inline, className, children, ...props }) {
+                  const match = /language-(\w+)/.exec(className || '');
+                  return !inline && match ? (
+                    <SyntaxHighlighter
+                      children={String(children).replace(/\n$/, '')}
+                      language={match[1]}
+                      PreTag="div"
+                      {...props}
+                    />
+                  ) : (
+                    <code
+                      className={className}
+                      {...props}
+                      style={{
+                        overflow: 'auto',
+                        width: '10vw',
+                        display: 'block',
+                      }}
+                    >
+                      {children}
+                    </code>
+                  );
+                },
+              }}
+            />
+          )}
+        </SectionBox>
+      </>
+    );
+  } else {
+    const { chartName, repoName } = useParams<{ chartName: string; repoName: string }>();
+    const [chart, setChart] = useState<{
+      name: string;
+      description: string;
+      logo_image_id: string;
+      readme: string;
+      app_version: string;
+      maintainers: Array<{ name: string; email: string }>;
+      home_url: string;
+      package_id: string;
+      version: string;
+    } | null>(null);
+    const [openEditor, setOpenEditor] = useState(false);
 
-        useEffect(() => {
-            fetchChartDetailFromArtifact(chartName, repoName).then(response => {
-                setChart(response);
-            });
-        }, [chartName, repoName]);
+    useEffect(() => {
+      fetchChartDetailFromArtifact(chartName, repoName).then(response => {
+        setChart(response);
+      });
+    }, [chartName, repoName]);
 
-        return (
-            <>
-                <EditorDialog
-                    openEditor={openEditor}
-                    chart={chart}
-                    handleEditor={open => {
-                        setOpenEditor(open);
-                    }}
-                />
-                <SectionBox
-                    title={
-                        <SectionHeader
-                            title={chartName}
-                            actions={[
-                                <Button
-                                    style={{
-                                        backgroundColor: '#000',
-                                        color: 'white',
-                                        textTransform: 'none',
-                                    }}
-                                    onClick={() => {
-                                        setOpenEditor(true);
-                                    }}
-                                >
-                                    Install
-                                </Button>,
-                            ]}
-                        />
-                    }
-                    backLink={createRouteURL('Charts')}
+    return (
+      <>
+        <EditorDialog
+          openEditor={openEditor}
+          chart={chart}
+          handleEditor={open => {
+            setOpenEditor(open);
+          }}
+        />
+        <SectionBox
+          title={
+            <SectionHeader
+              title={chartName}
+              actions={[
+                <Button
+                  style={{
+                    backgroundColor: '#000',
+                    color: 'white',
+                    textTransform: 'none',
+                  }}
+                  onClick={() => {
+                    setOpenEditor(true);
+                  }}
                 >
-                    {!chart ? (
-                        <Loader title=""/>
-                    ) : (
-                        <NameValueTable
-                            rows={[
-                                {
-                                    name: 'Name',
-                                    value: (
-                                        <Box display="flex" alignItems="center">
-                                            <Box mr={1}>
-                                                <img
-                                                    src={`https://artifacthub.io/image/${chart.logo_image_id}`}
-                                                    width="25"
-                                                    height="25"
-                                                    alt={chart.name}
-                                                />
-                                            </Box>
-                                            <Box>{chart.name}</Box>
-                                        </Box>
-                                    ),
-                                },
-                                {
-                                    name: 'Description',
-                                    value: (
-                                        <Box overflow="auto" width="80%">
-                                            {chart.description}
-                                        </Box>
-                                    ),
-                                },
-                                {
-                                    name: 'App Version',
-                                    value: chart.app_version,
-                                },
-                                {
-                                    name: 'Repository',
-                                    value: repoName,
-                                },
-                                {
-                                    name: 'Maintainers',
-                                    value: chart?.maintainers?.map(maintainer => (
-                                        <Box display="flex" alignItems="center" mt={1}>
-                                            <Box mr={1}>{maintainer.name}</Box>
-                                            <Box>{maintainer.email}</Box>
-                                        </Box>
-                                    )),
-                                },
-                                {
-                                    name: 'URL',
-                                    value: (
-                                        <Link href={chart.home_url} target="_blank">
-                                            {chart.home_url}
-                                        </Link>
-                                    ),
-                                },
-                            ]}
+                  Install
+                </Button>,
+              ]}
+            />
+          }
+          backLink={createRouteURL('Charts')}
+        >
+          {!chart ? (
+            <Loader title="" />
+          ) : (
+            <NameValueTable
+              rows={[
+                {
+                  name: 'Name',
+                  value: (
+                    <Box display="flex" alignItems="center">
+                      <Box mr={1}>
+                        <img
+                          src={`https://artifacthub.io/image/${chart.logo_image_id}`}
+                          width="25"
+                          height="25"
+                          alt={chart.name}
                         />
-                    )}
-                </SectionBox>
-                <SectionBox title="Readme">
-                    {!chart ? (
-                        <Loader title=""/>
-                    ) : (
-                        <ReactMarkdown
-                            style={{
-                                padding: '1rem',
-                            }}
-                            remarkPlugins={[remarkGfm, rehypeFilter]}
-                            children={chart.readme}
-                            components={{
-                                a: props => {
-                                    return <Link {...props} target="_blank"/>;
-                                },
-                                table: props => {
-                                    return (
-                                        <Table
-                                            {...props}
-                                            size="small"
-                                            style={{
-                                                tableLayout: 'fixed',
-                                            }}
-                                        />
-                                    );
-                                },
-                                thead: ({node, ...props}) => {
-                                    console.log(node, props);
-                                    return <TableHead {...props} />;
-                                },
-                                tr: props => {
-                                    return <TableRow {...props} />;
-                                },
-                                td: props => {
-                                    return <TableCell {...props} style={{textAlign: 'center', overflow: 'hidden'}}/>;
-                                },
-                                // eslint-disable-next-line
-                                pre: ({inline, className, children, ...props}) => {
-                                    return (
-                                        !inline && (
-                                            <pre {...props} className={className}>
-                      <Box display="block" width="64vw" my={0.5}>
-                        {children}
                       </Box>
-                    </pre>
-                                        )
-                                    );
-                                },
-                                // eslint-disable-next-line
-                                code({node, inline, className, children, ...props}) {
-                                    const match = /language-(\w+)/.exec(className || '');
-                                    return !inline && match ? (
-                                        <SyntaxHighlighter
-                                            children={String(children).replace(/\n$/, '')}
-                                            language={match[1]}
-                                            PreTag="div"
-                                            {...props}
-                                        />
-                                    ) : (
-                                        <code
-                                            className={className}
-                                            {...props}
-                                            style={{
-                                                overflow: 'auto',
-                                                width: '10vw',
-                                                display: 'block',
-                                            }}
-                                        >
-                                            {children}
-                                        </code>
-                                    );
-                                },
-                            }}
-                        />
-                    )}
-                </SectionBox>
-            </>
-        );
-    }
+                      <Box>{chart.name}</Box>
+                    </Box>
+                  ),
+                },
+                {
+                  name: 'Description',
+                  value: (
+                    <Box overflow="auto" width="80%">
+                      {chart.description}
+                    </Box>
+                  ),
+                },
+                {
+                  name: 'App Version',
+                  value: chart.app_version,
+                },
+                {
+                  name: 'Repository',
+                  value: repoName,
+                },
+                {
+                  name: 'Maintainers',
+                  value: chart?.maintainers?.map(maintainer => (
+                    <Box display="flex" alignItems="center" mt={1}>
+                      <Box mr={1}>{maintainer.name}</Box>
+                      <Box>{maintainer.email}</Box>
+                    </Box>
+                  )),
+                },
+                {
+                  name: 'URL',
+                  value: (
+                    <Link href={chart.home_url} target="_blank">
+                      {chart.home_url}
+                    </Link>
+                  ),
+                },
+              ]}
+            />
+          )}
+        </SectionBox>
+        <SectionBox title="Readme">
+          {!chart ? (
+            <Loader title="" />
+          ) : (
+            <ReactMarkdown
+              style={{
+                padding: '1rem',
+              }}
+              remarkPlugins={[remarkGfm, rehypeFilter]}
+              children={chart.readme}
+              components={{
+                a: props => {
+                  return <Link {...props} target="_blank" />;
+                },
+                table: props => {
+                  return (
+                    <Table
+                      {...props}
+                      size="small"
+                      style={{
+                        tableLayout: 'fixed',
+                      }}
+                    />
+                  );
+                },
+                thead: ({ node, ...props }) => {
+                  console.log(node, props);
+                  return <TableHead {...props} />;
+                },
+                tr: props => {
+                  return <TableRow {...props} />;
+                },
+                td: props => {
+                  return (
+                    <TableCell {...props} style={{ textAlign: 'center', overflow: 'hidden' }} />
+                  );
+                },
+                // eslint-disable-next-line
+                pre: ({ inline, className, children, ...props }) => {
+                  return (
+                    !inline && (
+                      <pre {...props} className={className}>
+                        <Box display="block" width="64vw" my={0.5}>
+                          {children}
+                        </Box>
+                      </pre>
+                    )
+                  );
+                },
+                // eslint-disable-next-line
+                code({ node, inline, className, children, ...props }) {
+                  const match = /language-(\w+)/.exec(className || '');
+                  return !inline && match ? (
+                    <SyntaxHighlighter
+                      children={String(children).replace(/\n$/, '')}
+                      language={match[1]}
+                      PreTag="div"
+                      {...props}
+                    />
+                  ) : (
+                    <code
+                      className={className}
+                      {...props}
+                      style={{
+                        overflow: 'auto',
+                        width: '10vw',
+                        display: 'block',
+                      }}
+                    >
+                      {children}
+                    </code>
+                  );
+                },
+              }}
+            />
+          )}
+        </SectionBox>
+      </>
+    );
+  }
 }
