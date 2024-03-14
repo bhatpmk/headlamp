@@ -25,15 +25,18 @@ import { EditorDialog } from './EditorDialog';
 
 export const PAGE_OFFSET_COUNT_FOR_CHARTS = 9;
 
-// TODO: Load this from environment and set default value as ARTIFACTHIB_IO
-export const CHART_PROFILE = 'VANILLA_HELM_REPOSITORY';
 export const VANILLA_HELM_REPO = 'VANILLA_HELM_REPOSITORY';
+
+// TODO: List of constants to be set by environment variables
+
+// Load this from environment and set default value as ARTIFACTHIB_IO
+export const CHART_PROFILE = 'VANILLA_HELM_REPOSITORY';
 
 // TODO: Load this from environment, probably as part of the deployment of the chart
 export const CHART_URL_PREFIX = 'http://localhost:80/';
 
-const CHART_PROVIDER_URL = 'https://docs.oracle.com/en/operating-systems/olcne/';
-const CHART_PROVIDER_INFO = 'Powered by Oracle Cloud Native Environment';
+const CUSTOM_PROVIDER_URL = 'https://docs.oracle.com/en/operating-systems/olcne/';
+const CUSTOM_PROVIDER_INFO = 'Powered by Oracle Cloud Native Environment';
 
 export function ChartsList({ fetchCharts = fetchChartsFromArtifact }) {
   const helmChartCategoryList = [
@@ -213,13 +216,19 @@ export function ChartsList({ fetchCharts = fetchChartsFromArtifact }) {
                         >
                           <Tooltip title={chart.name}>
                             <Typography component="h5" variant="h5">
+                              {/* TODO: The app-catalog using artifacthub.io loads the details about the chart with an option to install the chart
+                                        Fix this for vanilla helm repo */}
                               {chart.name}
                             </Typography>
                           </Tooltip>
                         </Box>
                         <Box display="flex" justifyContent="space-between" my={1}>
-                          {/* TODO: If the chart.version contains v prefix, remove it */}
-                          <Typography>v{chart.version}</Typography>
+                          {/* If the chart.version contains v prefix, remove it */}
+                          {chart.version.startsWith('v') ? (
+                             <Typography>{chart.version}</Typography>
+                          ):
+                             <Typography>v{chart.version}</Typography>
+                          }
                           <Box
                             marginLeft={1}
                             style={{
@@ -265,12 +274,22 @@ export function ChartsList({ fetchCharts = fetchChartsFromArtifact }) {
                         >
                           Install
                         </Button>
-                        {/* TODO: When there are multiple sources, the link includes comma separated values. For example, kube-prometheus-stack
-                                                        Don't display the link when there is no source provided for a given component.
-                                              */}
-                        <Link href={chart?.sources} target="_blank">
-                          Learn More
-                        </Link>
+                          {/*
+                            Provide Learn More link only when the chart has source
+                            When there are multiple sources for a chart, use the first source for the link, rather than using comma separated values
+                          */}
+                          {!chart?.sources ? (
+                              ""
+                          ) : chart.sources.length === 1 ? (
+                              <Link href={chart?.sources} target="_blank">
+                                  Learn More
+                              </Link>
+                          ) : (
+                              <Link href={chart?.sources[0]} target="_blank">
+                                  Learn More
+                              </Link>
+                          )
+                          }
                       </CardActions>
                     </Card>
                   </Box>
@@ -295,8 +314,8 @@ export function ChartsList({ fetchCharts = fetchChartsFromArtifact }) {
         )}
         {/* TODO: Display this only when the constants are set to a non-null value */}
         <Box textAlign="right">
-          <Link href={CHART_PROVIDER_URL} target="_blank">
-            {CHART_PROVIDER_INFO}
+          <Link href={CUSTOM_PROVIDER_URL} target="_blank">
+            {CUSTOM_PROVIDER_INFO}
           </Link>
         </Box>
       </>

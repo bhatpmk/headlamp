@@ -69,6 +69,7 @@ export default function ChartDetails() {
           }
           backLink={createRouteURL('Charts')}
         >
+          {/* TODO: Fix this to load the page on clicking the link for the component */}
           {!chart ? (
             <Loader title="" />
           ) : (
